@@ -16,7 +16,7 @@ export function Navbar() {
                     <div className="flex items-center">
                         <a href="/" className="flex items-center gap-3 flex-shrink-0">
                             <img
-                                src="src/assets/logo.jpg"
+                                src={LogoImage}
                                 alt="TeleHealth Logo"
                                 className="h-20 w-auto object-contain"
                             />
