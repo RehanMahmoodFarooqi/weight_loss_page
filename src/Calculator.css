@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap');
+
+:root {
+    --bg-gradient: linear-gradient(180deg, #d0e8ec 0%, #a8cdd4 100%);
+    --accent-blue: rgb(40, 67, 111);
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.4);
+    --text-primary: rgb(40, 67, 111);
+    --text-secondary: rgba(40, 67, 111, 0.85);
+}
+
+.calculator-container {
+    min-height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    font-family: 'Outfit', sans-serif;
+    color: #28436F;
+    padding: 40px 20px;
+}
+
+.calculator-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: auto;
+    background: var(--bg-gradient);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid #28436F;
+    padding: 10px 30px 40px 30px;
+    position: relative;
+    transition: all 0.3s ease;
+    color: var(--text-primary);
+}
+
+.layout-columns-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.main-title {
+    font-size: 50px;
+    font-weight: 800;
+    text-align: center;
+    width: 100%;
+    line-height: 1.1;
+    margin-bottom: 40px;
+    color: rgb(40, 67, 111);
+}
+
+/* Weight Machine Section */
+.weight-machine-wrapper {
+    position: relative;
+    width: 380px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.interactive-scale {
+    margin-top: 10px;
+    transform: scale(1.1);
+    transform-origin: center;
+}
+
+.weight-machine-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
+}
+
+.machine-label {
+    position: absolute;
+    top: -60px;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.machine-screen-overlay {
+    position: absolute;
+    top: 9%;
+    left: 52%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    background: #000;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.machine-display-text {
+    color: #00FF41;
+    /* Digital Lime Green for high contrast */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    letter-spacing: 2px;
+}
+
+.weight-input-container {
+    margin-top: 20px;
+    background: #ffffff;
+    /* Full white */
+    padding: 15px 20px;
+    border: none;
+    /* No border/shadow */
+    width: 200px;
+    text-align: center;
+    box-shadow: none;
+    /* Ensure no shadow */
+    border-radius: 10px;
+    /* Optional: adds a clean rounded button look if desired, or keep square */
+}
+
+.weight-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
+    font-size: 32px;
+    width: 100px;
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+}
+
+.weight-input:focus {
+    outline: none;
+}
+
+/* Vertical Slider Container */
+.slider-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 20px;
+}
+
+.vertical-slider-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 500px;
+    /* Reduced from 600px */
+    width: 120px;
+    position: relative;
+    margin-top: -50px;
+    /* Move entire bar up */
+}
+
+.vertical-slider-track {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    /* Reduced from 550px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The actual visual bar line */
+.track-line {
+    position: absolute;
+    width: 14px;
+    height: 100%;
+    background: white;
+    border-radius: 0;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Red Zero Line */
+/* Red Zero Line - Side Markers */
+.zero-line-marker {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 0;
+    z-index: 5;
+    transform: translateY(-50%);
+}
+
+.zero-line-marker::before,
+.zero-line-marker::after {
+    content: '';
+    position: absolute;
+    height: 4px;
+    /* Same as center dot if there was one, or just consistent thickness */
+    background-color: #ff3b3b;
+    top: 50%;
+    transform: translateY(-50%);
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.zero-line-marker::before {
+    left: -20px;
+    right: 50%;
+    margin-right: 7px;
+    /* 7px is half of 14px bar width */
+}
+
+.zero-line-marker::after {
+    left: 50%;
+    right: -20px;
+    margin-left: 7px;
+}
+
+/* Slider Arrow Handles */
+/* Unified Merged Arrows Slider Thumb */
+.slider-thumb {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    /* Center on the point */
+    width: 60px;
+    height: 100px;
+    z-index: 20;
+    cursor: grab;
+    transition: transform 0.1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-thumb:active {
+    cursor: grabbing;
+    transform: translate(-50%, 50%) scale(1.1);
+}
+
+.slider-arrows-merged {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Use explicit gap/margins to make tails touch */
+}
+
+.arrow-up,
+.arrow-down {
+    color: #28436F;
+    font-size: 48px;
+    font-weight: 800;
+    user-select: none;
+    height: 28px;
+    /* Restrict height so only the arrowhead part is widely visible, bringing tails close */
+    line-height: 28px;
+    overflow: visible;
+    /* Allow glyph to overflow but box is small */
+    display: flex;
+    justify-content: center;
+}
+
+.arrow-up {
+    align-items: flex-end;
+    /* Show bottom of glyph */
+}
+
+.arrow-down {
+    align-items: flex-start;
+    /* Show top of glyph */
+}
+
+.slider-labels-top,
+.slider-labels-bottom {
+    font-weight: 700;
+    color: #28436F;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+}
+
+/* Result Section */
+.result-container {
+    background: white;
+    color: var(--accent-blue);
+    padding: 40px 30px;
+    text-align: center;
+    width: 85%;
+    max-width: 450px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(40, 67, 111, 0.1);
+    margin-top: 20px;
+    /* Aligns with machine top */
+    height: 402px;
+    /* Matches scaled height of machine column (~380px * 1.1) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-label {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.result-value {
+    font-size: 80px;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.result-unit {
+    font-size: 32px;
+    margin-left: 10px;
+}
+
+.layout-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Explicit Symmetry */
+.layout-left,
+.layout-right {
+    flex: 1;
+    width: 100%;
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.layout-middle {
+    flex: 0 0 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.target-weight-display {
+    margin-top: 30px;
+    background: rgba(40, 67, 111, 0.05);
+    padding: 20px 40px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.target-weight-display .label {
+    color: var(--accent-blue);
+    opacity: 0.8;
+    font-size: 20px;
+}
+
+.target-weight-display .value {
+    color: var(--accent-blue);
+    font-size: 32px;
+}
+
+.target-weight-display .unit {
+    color: var(--accent-blue);
+    font-size: 16px;
+    opacity: 0.7;
+}
+
+@media (max-width: 1024px) {
+    .calculator-layout {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+        padding: 60px 20px;
+        gap: 60px;
+    }
+
+    .layout-columns-wrapper {
+        flex-direction: column;
+        gap: 60px;
+    }
+
+    .layout-left,
+    .layout-right {
+        min-width: 100%;
+    }
+
+    .layout-middle {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+}
+
+/* Animations */
+@keyframes fade-in-left {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-right {
+    0% {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate-fade-in-left {
+    animation: fade-in-left 1.5s ease-out forwards;
+}
+
+.animate-fade-in-right {
+    animation: fade-in-right 1.5s ease-out forwards;
+}
+
+/* Hide number input arrows */
+.no-arrow::-webkit-inner-spin-button,
+.no-arrow::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.no-arrow {
+    -moz-appearance: textfield;
+}
