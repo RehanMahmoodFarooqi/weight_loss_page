@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
-import TirzepatideImage from '../../assets/tirezepatide_viora-removebg-preview.png';
+
 import NewBottleImage from '../../assets/WhatsApp_Image_2026-02-12_at_9.54.56_AM-removebg-preview.png';
+import TirzepatideImage from '../../assets/tirezepatide_viora.png';
 import { MessageCircle } from 'lucide-react';
 
 export function WeightCalculator() {
@@ -154,7 +155,7 @@ export function WeightCalculator() {
                     {/* Left Bottle Image */}
                     <div className="hidden lg:flex flex-col items-center w-1/3 max-w-[450px] animate-fade-in-left mt-[550px]">
                         <img
-                            src="src/assets/new.png"
+                            src={TirzepatideImage}
                             alt="Tirzepatide Bottle"
                             className="w-full h-auto object-contain drop-shadow-2xl"
                         />

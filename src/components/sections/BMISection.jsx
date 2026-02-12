@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BmiBg from '../../assets/bg.jpeg';
+import image1 from "src/assets/ChatGPT Image Feb 7, 2026, 06_24_15 PM.png";
 
 export function BMISection() {
     const [weight, setWeight] = useState('');
@@ -97,7 +98,7 @@ export function BMISection() {
                 <div className="relative w-full">
                     <div className="absolute inset-x-0 bottom-0 top-10 bg-[#d0e8ec] blur-3xl opacity-30 -z-10"></div>
                     <img
-                        src="src/assets/ChatGPT Image Feb 7, 2026, 06_24_15 PM.png"
+                        src={image1}
                         alt="Weight Loss Transformation"
                         className="w-full h-auto border-4 border-white shadow-2xl"
                     />

@@ -1,6 +1,6 @@
 import React from 'react';
-import Slide1Img from '../../assets/slide1.png';
-import Slide4Img from '../../assets/slide4.png';
+import Slide1Img from "src/assets/ChatGPT Image Feb 7, 2026, 06_10_33 PM.png";
+import Slide4Img from "src/assets/ChatGPT Image Feb 7, 2026, 06_05_12 PM.png";
 
 export function FeatureSection() {
     return (
@@ -12,7 +12,7 @@ export function FeatureSection() {
                     <div className="relative overflow-hidden">
                         <div className="absolute inset-0 bg-[#d0e8ec]/30 blur-2xl -z-10 transform scale-95"></div>
                         <img
-                            src="src/assets/ChatGPT Image Feb 7, 2026, 06_10_33 PM.png"
+                            src={Slide1Img}
                             alt="Program Overview"
                             className="w-full h-auto object-cover border-4 border-white"
                         />
@@ -67,7 +67,7 @@ export function FeatureSection() {
                     <div className="relative overflow-hidden">
                         <div className="absolute inset-0 bg-[#28436F]/10 blur-2xl -z-10 transform scale-95"></div>
                         <img
-                            src="src/assets/ChatGPT Image Feb 7, 2026, 06_05_12 PM.png"
+                            src={Slide4Img}
                             alt="Additional Support"
                             className="w-full h-auto object-cover border-4 border-white"
                         />
