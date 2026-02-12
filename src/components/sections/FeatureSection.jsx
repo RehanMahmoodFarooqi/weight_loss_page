@@ -1,6 +1,6 @@
 import React from 'react';
-import Slide1Img from "src/assets/ChatGPT Image Feb 7, 2026, 06_10_33 PM.png";
-import Slide4Img from "src/assets/ChatGPT Image Feb 7, 2026, 06_05_12 PM.png";
+import Slide1Img from "../../assets/ChatGPT Image Feb 7, 2026, 06_10_33 PM.png";
+import Slide4Img from "../../assets/ChatGPT Image Feb 7, 2026, 06_05_12 PM.png";
 
 export function FeatureSection() {
     return (
