@@ -3,14 +3,14 @@ import { MedicationCard } from '../ui/MedicationCard';
 
 // Importing Images
 // Importing Latest High-Quality "removebg" Images from assetss
-import MounjaroImg from '../../assetss/Gemini_Generated_Image_ec4qvsec4qvsec4q-removebg-preview.png';
+import MounjaroImg from '../../assetss/mounjaro_card.png';
 import OzempicImg from '../../assetss/ozempic-removebg-preview.png';
 import WegovyImg from '../../assetss/wegovypen-removebg-preview.png';
 import ZepboundImg from '../../assetss/zepbound.png';
 import SemaglutideImg from '../../assets/semaglutidee.png';
-import TirzepatideImg from '../../assetss/Gemini_Generated_Image_1eizlr1eizlr1eiz-removebg-preview (2).png';
+import TirzepatideImg from '../../assetss/tirzepatide_card.png';
 import SaxendaImg from '../../assetss/saxenda-removebg-preview.png';
-import LiraglutideImg from '../../assetss/Gemini_Generated_Image_ec4qvsec4qvsec4q-removebg-preview.png';
+import LiraglutideImg from '../../assetss/liraglutide_card.png';
 import MedBgImg from '../../assets/med-bg.jpg';
 
 export function InjectableMedsSection() {

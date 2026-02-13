@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BmiBg from '../../assets/bg.jpeg';
-import image1 from "../../assets/ChatGPT Image Feb 7, 2026, 06_24_15 PM.png";
+import image1 from "../../assets/transformation_story.png";
 
 export function BMISection() {
     const [weight, setWeight] = useState('');

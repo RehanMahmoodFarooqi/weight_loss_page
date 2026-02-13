@@ -1,6 +1,6 @@
 import React from 'react';
 import { CheckCircle, Calendar, MessageCircle } from 'lucide-react';
-import DoctorImg from '../../assets/ChatGPT Image Feb 7, 2026, 05_11_24 PM.png';
+import DoctorImg from '../../assets/doctor_consultation.png';
 
 import TirzepatideVioraImg from '../../assets/tirezepatide_viora.png';
 import SemaglutideVioraImg from '../../assets/new.png';

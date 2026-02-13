@@ -4,9 +4,9 @@ import { MedicationCard } from '../ui/MedicationCard';
 // Importing Images
 // Importing Latest High-Quality "removebg" Images from assetss
 import RybelsusImg from '../../assetss/rhybelsus_pill-removebg-preview.png';
-import MetforminImg from '../../assetss/WhatsApp_Image_2026-02-06_at_12.26.06_AM__1_-removebg-preview (1).png';
-import TopiramateImg from '../../assetss/WhatsApp_Image_2026-02-06_at_12.26.07_AM-removebg-preview (1).png';
-import ContraveImg from '../../assetss/WhatsApp_Image_2026-02-06_at_12.26.02_AM__1_-removebg-preview (1).png';
+import MetforminImg from '../../assetss/metformin_card.png';
+import TopiramateImg from '../../assetss/topiramate_card.png';
+import ContraveImg from '../../assetss/contrave_card.png';
 import MedBgImg from '../../assets/med-bg.jpg';
 
 export function OralMedsSection() {
