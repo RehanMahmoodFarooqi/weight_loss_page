@@ -176,7 +176,7 @@ export function DoctorHeroSection() {
 
                     {/* Doctor Image - Shortened to end at GLP-1 heading */}
                     <div className="order-1 lg:order-2 relative h-full">
-                        <div className="relative h-full overflow-hidden group w-full min-h-[400px] lg:min-h-full">
+                        <div className="relative h-full overflow-hidden group w-full min-h-[200px] lg:min-h-full">
                             <div className="absolute inset-0 bg-gradient-to-t from-[#28436F]/40 to-transparent opacity-60 z-10 transition-opacity duration-500 group-hover:opacity-40"></div>
                             <img
                                 src={DoctorImg}
