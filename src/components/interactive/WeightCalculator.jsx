@@ -3,7 +3,7 @@ import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
 
 import NewBottleImage from '../../assets/medication_bottle_new.png';
-import TirzepatideImage from '../../assets/tirezepatide_viora.png';
+import TirzepatideImage from '../../assets/tirzepatide_viora.png';
 import { MessageCircle } from 'lucide-react';
 
 export function WeightCalculator() {

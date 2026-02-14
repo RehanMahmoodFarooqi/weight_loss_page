@@ -2,7 +2,7 @@ import React from 'react';
 import { CheckCircle, Calendar, MessageCircle } from 'lucide-react';
 import DoctorImg from '../../assets/doctor_consultation.png';
 
-import TirzepatideVioraImg from '../../assets/tirezepatide_viora.png';
+import TirzepatideVioraImg from '../../assets/tirzepatide_viora.png';
 import SemaglutideVioraImg from '../../assets/new.png';
 
 const InteractiveMedDisplay = ({ image, name, strengthData, volumeData }) => (

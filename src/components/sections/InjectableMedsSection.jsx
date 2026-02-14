@@ -3,7 +3,7 @@ import { MedicationCard } from '../ui/MedicationCard';
 
 // Importing Images
 // Importing Latest High-Quality "removebg" Images from assetss
-import MounjaroImg from '../../assetss/mounjaro_card.png';
+import MounjaroImg from '../../assets/mounjaro-removebg-preview.png';
 import OzempicImg from '../../assetss/ozempic-removebg-preview.png';
 import WegovyImg from '../../assetss/wegovypen-removebg-preview.png';
 import ZepboundImg from '../../assetss/zepbound.png';
