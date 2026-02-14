@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { ChevronDown } from 'lucide-react';
 
 export function FAQSection() {
     const faqs = [
@@ -41,8 +42,7 @@ export function FAQSection() {
     ];
 
     return (
-        <section className="bg-white pt-0 pb-10 px-4 md:px-8 mt-[15px]">
-            <br />
+        <section className="bg-white pt-20 pb-20 px-4 md:px-8">
             <div className="w-[90%] mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold text-center text-[#28436F] mb-16 font-lora">
                     Frequently Asked Questions
@@ -73,23 +73,37 @@ export function FAQSection() {
 }
 
 function FAQItem({ faq }) {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <div
-            className="border border-[#28436F]/20 relative overflow-hidden"
+            className="border border-[#28436F]/20 relative overflow-hidden transition-all duration-300"
             style={{
                 backgroundColor: '#DEECF7DE'
             }}
         >
-            <div className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10">
-                <span className="text-2xl font-bold text-[#28436F]">
+            <button
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10 hover:bg-[#28436F]/5 transition-colors"
+                onClick={() => setIsOpen(!isOpen)}
+            >
+                <span className="text-xl md:text-2xl font-bold text-[#28436F]">
                     {faq.question}
                 </span>
-            </div>
+                <ChevronDown
+                    className={`w-6 h-6 text-[#28436F] transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
+                />
+            </button>
 
-            <div className="px-6 pb-6 relative z-10">
-                <p className="text-[#28436F] leading-relaxed text-xl text-justify">
-                    {faq.answer}
-                </p>
+            <div
+                className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+            >
+                <div className="overflow-hidden">
+                    <div className="px-6 pb-6 pt-2 relative z-10">
+                        <p className="text-[#28436F] leading-relaxed text-lg md:text-xl text-justify">
+                            {faq.answer}
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     );
