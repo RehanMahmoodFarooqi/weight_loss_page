@@ -154,8 +154,8 @@ export function DoctorHeroSection() {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-                    {/* Content Box - How Medical Weight Loss Works */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
+                    {/* Content Box - Left side intro */}
                     <div className="order-2 lg:order-1 flex flex-col pt-0">
                         <div className="w-full">
                             <h4 className="text-4xl md:text-4xl font-bold text-[#28436F] mb-10 font-lora relative inline-block">
@@ -167,46 +167,16 @@ export function DoctorHeroSection() {
                                 Your body signals hunger & fullness based on hormones—our medications mimic those signals so you feel fuller faster and longer.
                             </p>
 
-                            <div className="space-y-20">
-                                {/* GLP-1 Section */}
-                                <div className="flex flex-col">
-                                    <h2 className="text-5xl font-bold text-[#28436F] mb-4 text-center">GLP-1</h2>
-                                    <p className="text-2xl font-semibold text-[#28436F] mb-12 opacity-80 text-center">Most successful weight loss medicines</p>
-
-                                    <div className="flex flex-col items-start px-2">
-                                        <h3 className="text-4xl font-bold text-[#28436F] mb-8">Semaglutide</h3>
-
-                                        <InteractiveMedDisplay
-                                            image={SemaglutideVioraImg}
-                                            name="Semaglutide"
-                                            strengthData={["2.5mg", "5mg", "7.5mg", "10mg", "12.5mg"]}
-                                            volumeData={["1mL", "2mL", "3mL", "4mL", "5mL"]}
-                                        />
-                                    </div>
-                                </div>
-
-                                {/* GIP/GLP-1 Section */}
-                                <div className="flex flex-col">
-                                    <h2 className="text-5xl font-bold text-[#28436F] mb-12 text-center">GIP/GLP-1</h2>
-
-                                    <div className="flex flex-col items-start px-2">
-                                        <h3 className="text-4xl font-bold text-[#28436F] mb-8">Tirzepatide</h3>
-
-                                        <InteractiveMedDisplay
-                                            image={TirzepatideVioraImg}
-                                            name="Tirzepatide"
-                                            strengthData={["17mg", "34mg", "51mg", "68mg", "85mg"]}
-                                            volumeData={["1mL", "2mL", "3mL", "4mL", "5mL"]}
-                                        />
-                                    </div>
-                                </div>
+                            <div className="flex flex-col">
+                                <h2 className="text-5xl font-bold text-[#28436F] mb-4 text-center lg:text-left">GLP-1</h2>
+                                <p className="text-2xl font-semibold text-[#28436F] mb-0 opacity-80 text-center lg:text-left">Most successful weight loss medicines</p>
                             </div>
                         </div>
                     </div>
 
-                    {/* Doctor Image - Full Grid Height */}
+                    {/* Doctor Image - Shortened to end at GLP-1 heading */}
                     <div className="order-1 lg:order-2 relative h-full">
-                        <div className="relative h-full overflow-hidden group w-full min-h-[600px] lg:min-h-full">
+                        <div className="relative h-full overflow-hidden group w-full min-h-[400px] lg:min-h-full">
                             <div className="absolute inset-0 bg-gradient-to-t from-[#28436F]/40 to-transparent opacity-60 z-10 transition-opacity duration-500 group-hover:opacity-40"></div>
                             <img
                                 src={DoctorImg}
@@ -220,6 +190,35 @@ export function DoctorHeroSection() {
                                     <p className="text-[#28436F] font-bold text-2xl mb-1 text-justify">Board-Certified Weight Loss Specialists</p>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Medication Sections - Below the initial grid */}
+                <div className="space-y-20 w-full">
+                    {/* GLP-1 Semaglutide Details */}
+                    <div className="flex flex-col items-start px-2">
+                        <h3 className="text-4xl font-bold text-[#28436F] mb-8">Semaglutide</h3>
+                        <InteractiveMedDisplay
+                            image={SemaglutideVioraImg}
+                            name="Semaglutide"
+                            strengthData={["2.5mg", "5mg", "7.5mg", "10mg", "12.5mg"]}
+                            volumeData={["1mL", "2mL", "3mL", "4mL", "5mL"]}
+                        />
+                    </div>
+
+                    {/* GIP/GLP-1 Section */}
+                    <div className="flex flex-col">
+                        <h2 className="text-5xl font-bold text-[#28436F] mb-12 text-center">GIP/GLP-1</h2>
+
+                        <div className="flex flex-col items-start px-2">
+                            <h3 className="text-4xl font-bold text-[#28436F] mb-8">Tirzepatide</h3>
+                            <InteractiveMedDisplay
+                                image={TirzepatideVioraImg}
+                                name="Tirzepatide"
+                                strengthData={["17mg", "34mg", "51mg", "68mg", "85mg"]}
+                                volumeData={["1mL", "2mL", "3mL", "4mL", "5mL"]}
+                            />
                         </div>
                     </div>
                 </div>
