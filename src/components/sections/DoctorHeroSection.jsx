@@ -156,7 +156,7 @@ export function DoctorHeroSection() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-16">
                     {/* Content Box - Left side intro */}
-                    <div className="order-2 lg:order-1 flex flex-col pt-0">
+                    <div className="order-2 lg:order-1 flex flex-col">
                         <div className="w-full">
                             <h4 className="text-4xl md:text-4xl font-bold text-[#28436F] mb-10 font-lora relative inline-block">
                                 How Medical Weight Loss Works
@@ -174,20 +174,20 @@ export function DoctorHeroSection() {
                         </div>
                     </div>
 
-                    {/* Doctor Image - Shortened to end at GLP-1 heading */}
-                    <div className="order-1 lg:order-2 relative h-full">
-                        <div className="relative h-full overflow-hidden group w-full min-h-[200px] lg:min-h-full">
+                    {/* Doctor Image - Reduced height to end at GLP-1 heading */}
+                    <div className="order-1 lg:order-2">
+                        <div className="relative h-[380px] lg:h-[450px] overflow-hidden group w-full rounded-[2rem] shadow-xl">
                             <div className="absolute inset-0 bg-gradient-to-t from-[#28436F]/40 to-transparent opacity-60 z-10 transition-opacity duration-500 group-hover:opacity-40"></div>
                             <img
                                 src={DoctorImg}
                                 alt="Consulting Doctor"
-                                className="w-full h-full object-cover transform transition duration-700 group-hover:scale-105"
+                                className="w-full h-full object-cover object-top transform transition duration-700 group-hover:scale-105"
                             />
 
                             {/* Badger overlay */}
-                            <div className="absolute bottom-8 left-4 right-4 z-10">
-                                <div className="bg-white/90 backdrop-blur-md p-4 border border-white/50">
-                                    <p className="text-[#28436F] font-bold text-2xl mb-1 text-justify">Board-Certified Weight Loss Specialists</p>
+                            <div className="absolute bottom-6 left-4 right-4 z-10">
+                                <div className="bg-white/90 backdrop-blur-md p-4 border border-white/50 rounded-2xl text-center">
+                                    <p className="text-[#28436F] font-bold text-xl mb-0">Board-Certified Specialists</p>
                                 </div>
                             </div>
                         </div>
