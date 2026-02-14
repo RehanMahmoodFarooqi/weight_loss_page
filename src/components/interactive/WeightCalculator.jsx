@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
 
-import NewBottleImage from '../../assets/medication_bottle_new.png';
+import NewBottleImage from '../../assets/new.png';
 import TirzepatideImage from '../../assets/tirzepatide_viora.png';
 import { MessageCircle } from 'lucide-react';
 
