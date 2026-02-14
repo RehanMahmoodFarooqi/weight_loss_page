@@ -83,7 +83,7 @@ function FAQItem({ faq }) {
             }}
         >
             <button
-                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10 hover:bg-[#28436F]/5 transition-colors"
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <span className="text-xl md:text-2xl font-bold text-[#28436F]">
