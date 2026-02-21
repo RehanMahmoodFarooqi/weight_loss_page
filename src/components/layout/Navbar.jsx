@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { Calendar, MessageCircle, Menu, ChevronDown, X, Globe, Headset, Search } from 'lucide-react';
 import LogoImage from '../../assets/logo.jpg';
 
+import ProductDesignImg from '../../assets/ChatGPT Image Feb 16, 2026, 08_29_45 PM.png';
+
 export function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     return (
-        <nav className="bg-white sticky top-0 z-50 border-b-[8px] border-[#d0e8ec] shadow-sm">
+        <nav className="bg-white sticky top-0 z-[1000] border-b-[8px] border-[#d0e8ec]" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
 
             {/* Sub Header (Main Navigation) */}
             <div className="max-w-[1920px] mx-auto px-4 md:px-6">
@@ -24,7 +26,124 @@ export function Navbar() {
 
                         <div className="hidden lg:flex items-center gap-3 ml-4">
                             <a href="#urgent-care" className="hover:text-[#0181F5] transition whitespace-nowrap tracking-wide cursor-pointer font-bold text-[18px] text-[rgb(0,119,181)]">Urgent Care</a>
-                            <a href="#weight-loss" className="hover:text-[#0181F5] transition whitespace-nowrap tracking-wide cursor-pointer font-bold text-[18px] text-[rgb(0,119,181)]">Weight Loss</a>
+
+                            {/* Weight Loss - Mega Menu Trigger */}
+                            <div className="mega-menu-trigger relative" style={{ position: 'static' }}>
+                                <a
+                                    href="#weight-loss"
+                                    className="hover:text-[#0181F5] transition whitespace-nowrap tracking-wide cursor-pointer font-bold text-[18px] text-[rgb(0,119,181)] flex items-center gap-1 nav-link-animated"
+                                    style={{ height: '96px', display: 'flex', alignItems: 'center' }}
+                                >
+                                    Weight Loss
+                                </a>
+
+                                {/* Mega Menu Panel */}
+                                <div
+                                    className="mega-menu-panel"
+                                    style={{
+                                        position: 'absolute',
+                                        top: '100%',
+                                        left: 0,
+                                        right: 0,
+                                        width: '100vw',
+                                        marginLeft: 'calc(-50vw + 50%)',
+                                        backgroundColor: '#ffffff',
+                                        borderTop: '8px solid #d0e8ec',
+                                        zIndex: 100,
+                                        padding: '0',
+                                    }}
+                                >
+                                    <div style={{
+                                        width: '100%',
+                                        padding: '36px 60px 40px',
+                                    }}>
+                                        {/* 4-Column Grid */}
+                                        <div style={{
+                                            display: 'grid',
+                                            gridTemplateColumns: '1fr 1fr 1fr 420px',
+                                            gap: '0 48px',
+                                            alignItems: 'start',
+                                        }}>
+
+                                            {/* Column 1 & 2 Wrapper */}
+                                            <div style={{ gridColumn: '1 / 3' }}>
+                                                {/* Inner Grid for Lists */}
+                                                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px' }}>
+                                                    {/* Column 1: Most Selling */}
+                                                    <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                        <div className="mega-menu-heading">MOST SELLING MEDICATIONS</div>
+                                                        <a href="#" className="mega-menu-item">Compounded Tirzepatide <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Compounded Semaglutide <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Oral Tirzepatide <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Oral Semaglutide <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">GLP-1 Lozenge <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item mega-menu-item-no-border">GLP-1 Micro Dose <span className="mega-rx">Rx</span></a>
+                                                    </div>
+
+                                                    {/* Column 2: Branded */}
+                                                    <div>
+                                                        <div className="mega-menu-heading">BRANDED MEDICATIONS</div>
+                                                        <a href="#" className="mega-menu-item">Wegovy<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Ozempic<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Zepbound<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Mounjaro<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item">Saxenda<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                        <a href="#" className="mega-menu-item mega-menu-item-no-border">Rybelsus (Oral)<sup style={{ fontSize: '9px' }}>®</sup> <span className="mega-rx">Rx</span></a>
+                                                    </div>
+                                                </div>
+
+                                                {/* Explore Button - Now centered between Column 1 & 2 */}
+                                                <div style={{ marginTop: '24px', display: 'flex', justifyContent: 'center' }}>
+                                                    <a href="#weight-loss" className="mega-explore-btn" style={{ width: '280px' }}>
+                                                        Explore Weight Loss
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            {/* Column 3: Additional Sub-A */}
+                                            <div style={{ gridColumn: '3 / 4' }}>
+                                                <div className="mega-menu-heading">ADDITIONAL WEIGHT LOSS – SUPPORTING MEDICATIONS</div>
+                                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                                    <a href="#" className="mega-menu-item">Lipotropic (MIC) + B12 <span className="mega-rx">Rx</span></a>
+                                                    <a href="#" className="mega-menu-item">Vitamin B12</a>
+                                                    <a href="#" className="mega-menu-item">Glutathione</a>
+                                                    <a href="#" className="mega-menu-item">NAD+ Injections</a>
+                                                    <a href="#" className="mega-menu-item">NAD+ Nasal Spray</a>
+                                                    <a href="#" className="mega-menu-item">Peptides</a>
+                                                    <a href="#" className="mega-menu-item mega-menu-item-no-border">Slim Shot : Lipo(MIC)</a>
+                                                </div>
+                                            </div>
+
+                                            {/* Column 4: Product Card (spans all rows) */}
+                                            <div style={{ gridColumn: '4', gridRow: '1 / 3' }}>
+                                                <div
+                                                    className="mega-menu-card"
+                                                    style={{
+                                                        background: '#ffffff',
+                                                        borderRadius: '16px',
+                                                        overflow: 'hidden',
+                                                        height: '100%',
+                                                        display: 'flex',
+                                                        flexDirection: 'column',
+                                                        boxShadow: '0 4px 20px rgba(0,0,0,0.08)'
+                                                    }}
+                                                >
+                                                    <img
+                                                        src={ProductDesignImg}
+                                                        alt="Medication Products"
+                                                        style={{
+                                                            width: '100%',
+                                                            height: '100%',
+                                                            objectFit: 'cover'
+                                                        }}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                             <a href="#skin-care" className="hover:text-[#0181F5] transition whitespace-nowrap tracking-wide cursor-pointer font-bold text-[18px] text-[rgb(0,119,181)]">Skin Care</a>
                             <a href="#hair-loss" className="hover:text-[#0181F5] transition whitespace-nowrap tracking-wide cursor-pointer font-bold text-[18px] text-[rgb(0,119,181)]">Hair Loss</a>
 

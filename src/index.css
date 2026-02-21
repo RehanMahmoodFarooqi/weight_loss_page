@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 @import "tailwindcss";
 
 :root {
-  font-family: Lora, ui-serif, Georgia, Cambria, Times New Roman, Times, serif;
+  font-family: 'Roboto', sans-serif !important;
   line-height: 1.5;
   font-weight: 400;
 
@@ -99,7 +100,7 @@ body {
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 2s ease-in-out infinite;
 }
 
 @keyframes bmiPulse {
@@ -184,12 +185,28 @@ body {
   }
 
   50% {
-    transform: scale(1.05);
+    transform: scale(1.15);
   }
 }
 
 .animate-pulse-zoom {
   animation: pulse-zoom 2s ease-in-out infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
 }
 
 /* BMI Input Specifics */
@@ -204,4 +221,209 @@ body {
 .bmi-number-input {
   -moz-appearance: textfield;
   appearance: textfield;
+}
+
+/* ===== Mega Menu ===== */
+.mega-menu-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+  pointer-events: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.13) !important;
+}
+
+.mega-menu-trigger:hover .mega-menu-panel,
+.mega-menu-panel:hover {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.mega-menu-card {
+  border-radius: 12px !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+}
+
+.mega-menu-heading {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #1a3a6b;
+  margin-bottom: 20px;
+  white-space: nowrap;
+}
+
+.mega-menu-item {
+  display: block;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 18px;
+  color: #111111;
+  padding: 10px 0;
+  transition: color 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 1.6;
+  width: 100%;
+  position: relative;
+}
+
+.mega-menu-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background-image: radial-gradient(circle, #daeffc 1.5px, transparent 1.5px);
+  background-size: 10px 3px;
+  background-position: bottom;
+  background-repeat: repeat-x;
+}
+
+.mega-menu-item-no-border::after {
+  display: none;
+}
+
+.mega-menu-item:hover {
+  color: #0077b5;
+}
+
+.mega-rx {
+  font-size: 11px;
+  vertical-align: super;
+  margin-left: 2px;
+  color: #111111;
+  font-weight: 400;
+}
+
+.mega-explore-btn {
+  display: block;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif !important;
+  background-color: #28436F;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  padding: 16px 24px;
+  margin-top: 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+  letter-spacing: 0.02em;
+  border-radius: 0 !important;
+  text-decoration: none;
+}
+
+.mega-explore-btn:hover {
+  background-color: #1a2f4f;
+  color: white;
+}
+
+.mega-product-title {
+  font-family: 'Lora', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1a3a6b;
+  line-height: 1.3;
+}
+
+.mega-product-subtitle {
+  font-family: 'Lora', ui-serif, Georgia, Cambria, 'Times New Roman', Times, serif;
+  font-size: 14px;
+  color: #5a7fa8;
+  margin-top: 4px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.nav-link-animated {
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: 25px;
+  left: 0;
+  background-color: #0181F5;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.nav-link-animated:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ===== Global Tags ===== */
+.global-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 9999px !important;
+  /* Circular for tags */
+  font-size: 16px;
+  font-weight: 800 !important;
+  color: #28436F;
+  border: 1px solid rgba(40, 67, 111, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  white-space: nowrap;
+  font-family: 'Roboto', sans-serif !important;
+  text-transform: capitalize;
+}
+
+.tag-text {
+  line-height: 1;
+}
+
+/* ===== Premium Button Pulse Animation ===== */
+@keyframes btn-pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(43, 76, 154, 0.4);
+  }
+
+  70% {
+    transform: scale(1.05);
+    box-shadow: 0 0 0 12px rgba(43, 76, 154, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(43, 76, 154, 0);
+  }
+}
+
+.btn-pulse {
+  animation: btn-pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.btn-pulse:hover {
+  animation: none;
+  transform: scale(1.02);
+  background-color: #1c1c1c !important;
+}
+
+.btn-pulse-fast {
+  animation: btn-pulse 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.btn-pulse-fast:hover {
+  animation: none;
+  transform: scale(1.02);
+  background-color: #1c1c1c !important;
 }

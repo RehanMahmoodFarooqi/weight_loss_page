@@ -2,27 +2,39 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
 
-import NewBottleImage from '../../assets/medication_bottle_new.png';
-import TirzepatideImage from '../../assets/tirzepatide_viora.png';
+import NewBottleImage from '../../assets/dfafafdfafd2.gif';
+import TirzepatideImage from '../../assets/hkjuiy.gif';
 import { MessageCircle } from 'lucide-react';
+
+// Floating Pill Assets
+import wc1 from '../../assets/wc1.png';
+import wc2 from '../../assets/wc2.png';
+import wc3 from '../../assets/wc3.png';
+import wc4 from '../../assets/wc4.png';
+import dark1 from '../../assets/dark1-removebg-preview.png';
+import dark3 from '../../assets/dark3-removebg-preview.png';
+// import dark4 from '../../assets/dark4-removebg-preview.png';
 
 export function WeightCalculator() {
     const [currentWeight, setCurrentWeight] = useState(300);
     const [weightChange, setWeightChange] = useState(0);
     const trackRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
+    const [gifKey, setGifKey] = useState(0);
+
+    // Force GIF restart periodically
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setGifKey(prev => prev + 1);
+        }, 5000);
+        return () => clearInterval(interval);
+    }, []);
 
     const handleWeightChange = (e) => {
         const val = Number(e.target.value);
         if (!isNaN(val)) setCurrentWeight(val);
     };
 
-    const handleTargetWeightChange = (e) => {
-        const targetVal = Number(e.target.value);
-        if (!isNaN(targetVal)) {
-            setWeightChange(targetVal - currentWeight);
-        }
-    };
 
     const handleDrag = (clientX) => {
         if (!trackRef.current) return;
@@ -46,7 +58,7 @@ export function WeightCalculator() {
         // internal value: -1 to 1
         const value = (percentage - 0.5) * 2;
 
-        setWeightChange(Math.round(value * 50));
+        setWeightChange(Math.round(value * 100));
     };
 
     const startDrag = (e) => {
@@ -88,15 +100,60 @@ export function WeightCalculator() {
             }}
         >
             {/* Main Content Container */}
-            <div className="w-full mx-auto px-4 md:px-8 relative z-10 py-8 lg:py-2 ">
+
+            {/* Background Floating Pills - Positioned Above Bottles (z-20) */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+                {[
+                    // Top Left Cluster
+                    { src: dark1, top: '8%', left: '8%', width: '110px', delay: '1.5s', rotate: '-30deg' },
+                    { src: wc1, top: '23%', left: '13%', width: '120px', delay: '0s', rotate: '35deg' },
+                    { src: wc3, top: '40%', left: '10%', width: '120px', delay: '2s' },
+
+                    // Top Right Cluster
+                    { src: wc2, top: '8%', right: '8%', width: '130px', delay: '1s' },
+                    { src: dark3, top: '20%', right: '15%', width: '110px', delay: '2.5s', rotate: '40deg' },
+                    { src: wc4, top: '40%', right: '10%', width: '150px', delay: '0.5s', rotate: '-35deg' },
+
+                    // Bottom Left Cluster
+                    { src: dark3, bottom: '30%', left: '23%', width: '100px', delay: '0.8s', rotate: '20deg' },
+                    { src: wc2, bottom: '2%', left: '18%', width: '120px', delay: '3s', rotate: '-45deg' },
+
+
+                    // Bottom Right Cluster
+                    { src: wc1, bottom: '33%', right: '20%', width: '130px', delay: '2.2s', rotate: '30deg' },
+                    { src: dark1, bottom: '3%', right: '23%', width: '110px', delay: '1.2s', rotate: '-15deg' },
+
+                    // Top Center / Floating High
+                    // { src: dark4, top: '12%', left: '50%', transform: 'translateX(-50%)', width: '120px', delay: '3s' },
+                ].map((pill, i) => (
+                    <img
+                        key={i}
+                        src={pill.src}
+                        alt="Decorative Pill"
+                        className="absolute animate-float opacity-90 drop-shadow-lg"
+                        style={{
+                            top: pill.top,
+                            left: pill.left,
+                            right: pill.right,
+                            bottom: pill.bottom,
+                            width: pill.width,
+                            transform: pill.transform,
+                            rotate: pill.rotate || undefined,
+                            animationDelay: pill.delay
+                        }}
+                    />
+                ))}
+            </div>
+
+            <div className="w-full mx-auto px-4 md:px-8 relative py-8 lg:py-2 ">
 
                 {/* Header Text - Now Above and Centered */}
                 {/* Header Text - Based on Design Mock */}
                 <div className="text-center w-[90%] mx-auto mb-8 mt-8 animate-fade-in-up space-y-4">
                     {/* Largest Heading */}
-                    <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#28436F] font-lora leading-tight whitespace-nowrap">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#28436F] font-lora leading-tight whitespace-nowrap">
                         Your Goal Weight Isn't a Dream. <br />
-                        It's a Plan...
+                        It's a Plan.........
                     </h1>
 
                     {/* Larger Heading with Icon */}
@@ -150,18 +207,34 @@ export function WeightCalculator() {
                     </div> */}
                 </div>
 
-                <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-12 w-full max-w-[1920px] mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-start justify-center gap-8 lg:gap-0 w-full max-w-[1920px] mx-auto px-4">
 
-                    {/* Left Bottle Image */}
-                    <div className="hidden lg:flex flex-col items-center w-1/3 max-w-[400px] animate-fade-in-left mt-[550px]">
-                        <img
-                            src={NewBottleImage}
-                            alt="Tirzepatide Bottle"
-                            className="w-full h-auto object-contain drop-shadow-2xl"
-                        />
+                    {/* Left Column (Grid 1) */}
+                    <div className="flex flex-col items-center lg:items-end w-full lg:w-1/3 animate-fade-in-left order-1 lg:order-none mb-8 lg:mb-0 lg:-mr-8">
+                        {/* Input field */}
+                        <div className="flex flex-col items-center mb-8 lg:mt-[180px]">
+                            <h3 className="text-3xl font-bold text-[#28436F] text-center">Enter Your Weight</h3>
+                            <input
+                                type="number"
+                                value={currentWeight}
+                                onChange={handleWeightChange}
+                                className="w-[130px] text-center bg-white rounded-2xl py-3 text-3xl font-bold text-[#28436F] transition-all outline-none shadow-sm no-arrow border-2 border-transparent focus:border-[#2B4C9A] mt-4"
+                                placeholder="300"
+                            />
+                        </div>
+
+                        {/* Bottle Image - Left */}
+                        <div className="hidden lg:flex mt-[60px] lg:-translate-x-48 w-full max-w-[450px]">
+                            <img
+                                src={NewBottleImage}
+                                alt="Medication Bottle"
+                                className="w-full h-auto object-contain drop-shadow-2xl animate-float"
+                                style={{ width: '100%', height: 'auto' }}
+                            />
+                        </div>
                     </div>
 
-                    <div className="flex flex-col items-center justify-center rounded-[3rem] p-6 md:p-10 w-full lg:w-1/2 max-w-4xl mx-auto">
+                    <div className="flex flex-col items-center justify-center rounded-[3rem] p-6 md:p-10 w-full lg:w-[35%] max-w-2xl mx-auto relative z-30">
 
                         {/* Calculator Functions (Centered) */}
                         <div className="w-full flex flex-col items-center text-center space-y-6 animate-fade-in-up relative justify-center">
@@ -178,35 +251,27 @@ export function WeightCalculator() {
                                         alt="Digital Weight Scale"
                                         className="w-full h-auto mx-auto"
                                     />
-                                    {/* Digital Overlay - Precisely positioned on the machine screen */}
-                                    <div className="absolute top-[12%] left-1/2 -translate-x-1/3 w-[18%] h-[15%] bg-black rounded-sm border-2 border-gray-700 shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] flex flex-col items-center justify-center z-20">
-                                        <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#00FF41] font-mono tracking-widest drop-shadow-[0_0_8px_rgba(0,255,65,0.8)]">
+                                    {/* Digital Overlay - Matches Reference Image Exactly */}
+                                    <div className="absolute top-[11.5%] left-1/2 -translate-x-[45%] w-[20%] h-[22%] bg-black rounded-sm border border-gray-800 flex flex-col items-center justify-center z-20 shadow-[0_0_15px_rgba(0,0,0,0.8)]">
+                                        <span className="text-3xl md:text-4xl lg:text-4xl font-bold text-[#00ff41] font-mono leading-none drop-shadow-[0_0_10px_rgba(0,255,65,0.7)]">
                                             {currentWeight}
-                                        </div>
-                                        <span className="text-xs font-bold text-[#00FF41]/70 mt-0.5 uppercase tracking-wider">LBS</span>
+                                        </span>
+                                        <span className="text-[10px] md:text-xs font-bold text-[#00ff41]/90 uppercase tracking-[0.3em] font-mono">
+                                            LBS
+                                        </span>
                                     </div>
                                 </div>
 
-                                {/* NEW: Input field below calculator picture */}
-                                <div className="mt-8 w-full flex flex-col items-center mt-16">
-                                    <h3 className="text-3xl font-bold text-[#28436F] mb-4">Enter Your Weight</h3>
-                                    <input
-                                        type="number"
-                                        value={currentWeight}
-                                        onChange={handleWeightChange}
-                                        className="w-[200px] text-center bg-white rounded-2xl py-3 text-3xl font-bold text-[#28436F] transition-all outline-none shadow-sm no-arrow"
-                                        placeholder="300"
-                                    />
-                                </div>
-                            </div>
 
+
+                            </div>
                             {/* 2. Slider Section */}
-                            <div className="w-full max-w-2xl space-y-4 flex flex-col items-center mt-8">
-                                <h3 className="text-3xl font-bold text-[#28436F]">
+                            <div className="w-full space-y-4 flex flex-col items-center mt-8">
+                                <h3 className="text-3xl font-bold text-[#28436F] whitespace-nowrap">
                                     How Much Weight You Wish To Lose
                                 </h3>
 
-                                <div className="w-full px-8">
+                                <div className="w-full px-2">
                                     <div
                                         className="relative h-16 flex items-center select-none cursor-pointer"
                                         ref={trackRef}
@@ -214,10 +279,10 @@ export function WeightCalculator() {
                                         onTouchStart={startDrag}
                                     >
                                         {/* Track */}
-                                        <div className="absolute w-full h-6 bg-white border-2 border-[#2B4C9A]/20 rounded-full shadow-inner relative z-0">
+                                        <div className="absolute w-full h-8 bg-white border-2 border-[#2B4C9A]/20 rounded-full shadow-inner relative z-0">
                                             {/* Red Center Markers (Outside) - Lengthened */}
-                                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-1.5 h-6 bg-red-600 rounded-full"></div>
-                                            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-1.5 h-6 bg-red-600 rounded-full"></div>
+                                            <div className="absolute -top-8 left-1/2 -translate-x-1/2 w-1.5 h-8 bg-red-600 rounded-full"></div>
+                                            <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-1.5 h-8 bg-red-600 rounded-full"></div>
 
                                             {/* Subtle internal indicator */}
                                             <div className="absolute left-1/2 top-1/4 bottom-1/4 w-[1px] bg-red-600/30"></div>
@@ -225,13 +290,13 @@ export function WeightCalculator() {
 
                                         {/* Slider Thumb - Now Circle */}
                                         <div
-                                            className="absolute top-1/2 -translate-y-1/70 w-10 h-10 bg-white border-4 border-[#2B4C9A] rounded-full flex items-center justify-center z-20 shadow-lg transition-transform hover:scale-110 active:scale-95"
+                                            className="absolute top-1/2 -translate-y-1/70 w-14 h-14 bg-white border-4 border-[#2B4C9A] rounded-full flex items-center justify-center z-20 shadow-lg transition-transform hover:scale-110 active:scale-95"
                                             style={{
-                                                left: `${((weightChange / 50) + 1) / 2 * 100}%`,
+                                                left: `${((weightChange / 100) + 1) / 2 * 100}%`,
                                                 transform: 'translate(-50%, -50%)'
                                             }}
                                         >
-                                            <div className="flex items-center gap-0.5 text-[#2B4C9A] font-bold text-lg select-none">
+                                            <div className="flex items-center gap-0.5 text-[#2B4C9A] font-bold text-xl select-none">
                                                 <span>&lt;</span>
                                                 <span>&gt;</span>
                                             </div>
@@ -254,32 +319,38 @@ export function WeightCalculator() {
                                 </div>
                             </div>
 
-                            {/* 4. Target Weight Section (Editable Field) */}
-                            <div className="w-full flex flex-col items-center gap-2 mt-8">
-                                <h3 className="text-3xl font-bold text-[#28436F]">Target Weight</h3>
-                                <div className="relative group w-full flex flex-col items-center mt-4">
-                                    <div className="w-[120px] bg-white rounded-2xl py-3 text-3xl font-bold text-[#28436F] shadow-sm cursor-default flex items-center justify-center">
-                                        {estimatedWeight}
-                                    </div>
 
-                                </div>
-                            </div>
 
                         </div>
 
                     </div>
 
-                    {/* Right Bottle Image */}
-                    <div className="hidden lg:flex flex-col items-center w-1/3 max-w-[400px] animate-fade-in-right mt-[550px]">
-                        <img
-                            src={NewBottleImage}
-                            alt="Medication Bottle"
-                            className="w-full h-auto object-contain drop-shadow-2xl"
-                        />
+                    {/* Right Column (Grid 3) */}
+                    <div className="flex flex-col items-center lg:items-start w-full lg:w-1/3 animate-fade-in-right order-3 lg:order-none mt-8 lg:mt-0 lg:-ml-8">
+                        {/* Target Weight */}
+                        <div className="flex flex-col items-center mb-8 lg:mt-[180px]">
+                            <h3 className="text-3xl font-bold text-[#28436F] text-center">Target Weight</h3>
+                            <div className="relative group flex flex-col items-center mt-4">
+                                <div className="w-[130px] bg-white rounded-2xl py-3 text-3xl font-bold text-[#28436F] shadow-sm cursor-default flex items-center justify-center border-2 border-transparent">
+                                    {estimatedWeight}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Bottle Image - Right */}
+                        <div className="hidden lg:flex mt-[60px] lg:translate-x-48 w-full max-w-[450px]">
+                            <img
+                                key={gifKey}
+                                src={TirzepatideImage}
+                                alt="Medication Bottle"
+                                className="w-full h-auto object-contain drop-shadow-2xl animate-float"
+                                style={{ animationDelay: '0.5s', width: '100%', height: 'auto' }}
+                            />
+                        </div>
                     </div>
 
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

@@ -1,50 +1,56 @@
 import React from 'react';
+import LogoImg from '../../assets/logo.png';
 
 export function MedicationCard({ item }) {
     if (!item) return null;
 
     return (
-        <div className="bg-white border border-blue-50 p-4 flex flex-col items-center text-center hover:border-blue-200 hover:-translate-y-1 transition-all duration-300 transform group h-full relative overflow-hidden">
-            {/* Hover Gradient Effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50/0 via-blue-50/0 to-blue-50/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        <div
+            className="bg-[#d0e8ec] flex flex-col text-left hover:-translate-y-1 transition-all duration-300 transform group h-full relative overflow-hidden rounded-lg px-4 pt-0 pb-3"
+            style={{ fontFamily: "'Lora', 'Roboto', sans-serif" }}
+        >
 
-            <h4 className="text-2xl font-bold text-[#28436F] mb-1 font-lora relative z-10">{item.name}</h4>
-
-            <p className="text-base text-[#28436F]/70 mb-4 font-medium relative z-10">{item.generic}</p>
-
-            <div className="w-full flex items-center justify-center mb-6 relative z-10">
-                {/* Product Wrapper with float animation - EVERYTHING inside moves together */}
-                <div className="relative w-full h-48 flex items-center justify-center animate-float">
-
-                    {/* The Tilted, Revolving Water-like Ring (Glassy & Transparent) */}
-                    {/* This creates the "moving parallelogram" liquid ring effect */}
-                    <div className="absolute w-52 h-52 bg-transparent border-[6px] border-[#d0e8ec]/80 rounded-full animate-revolve pointer-events-none z-0 shadow-[0_0_20px_rgba(208,232,236,0.6)] backdrop-blur-sm"></div>
-
-                    {/* Secondary Tilted Ring for depth */}
-                    <div className="absolute w-48 h-48 border border-[#d0e8ec]/50 rounded-full animate-revolve [animation-delay:-4s] pointer-events-none z-0"></div>
-
-                    {/* Water-like liquid ripples underneath for modern feel */}
-                    <div className="absolute w-44 h-44 border border-[#d0e8ec]/30 rounded-full animate-ripple pointer-events-none"></div>
-
-                    {/* Subtle glow blur blob */}
-                    <div className="absolute inset-0 bg-[#d0e8ec]/10 scale-90 blur-3xl -z-10 group-hover:bg-[#d0e8ec]/20 transition-all duration-700"></div>
-
+            {/* Medication Name + Logo */}
+            <div className="flex justify-between items-center mb-0 gap-2">
+                <h4 className="text-[22px] font-extrabold text-[#28436F] leading-snug tracking-tight">
+                    {item.name}
+                    {item.showRx !== false && (
+                        <span className="text-[11px] font-normal align-super ml-1 text-[#28436F]">
+                            ® <span className="text-[10px] font-semibold">Rx</span>
+                        </span>
+                    )}
+                </h4>
+                <div className="w-32 h-32 flex-shrink-0 -mt-6 -mr-4">
                     <img
-                        src={item.image}
-                        alt={item.name}
-                        className="max-h-full max-w-full object-contain filter drop-shadow-sm group-hover:drop-shadow-xl group-hover:scale-110 transition-all duration-500 relative z-10"
+                        src={LogoImg}
+                        alt="Logo"
+                        className="w-full h-full object-contain brightness-110"
                     />
                 </div>
             </div>
 
-            <div className="mt-auto w-full relative z-10">
-                <p className="text-xs text-[#28436F] font-bold uppercase tracking-widest mb-1">As low as</p>
-                <div className="inline-block bg-[#28436F] px-6 py-2.5 border border-blue-900/10 text-white shadow-sm group-hover:bg-[#1e3252] transition-all duration-300">
-                    <span className="text-3xl font-bold">
+            {/* Product Image — takes all remaining space */}
+            <div className="flex-1 flex items-center justify-center overflow-hidden">
+                <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-[260px] w-full object-contain group-hover:scale-110 transition-transform duration-500 drop-shadow-lg"
+                />
+            </div>
+
+            {/* Bottom: As Low As + Price + Get Started */}
+            <div className="mt-2">
+                <p className="text-[11px] text-[#28436F] font-bold uppercase tracking-[0.12em] mb-1.5 text-center">
+                    As Low As
+                </p>
+                <div className="flex items-stretch gap-2">
+                    <button className="flex-1 bg-white border border-[#28436F] text-[#28436F] text-[17px] font-bold py-2.5 px-3 text-center transition-colors duration-200">
                         {item.price}
-                    </span>
+                    </button>
+                    <button className="flex-1 bg-[#28436F] text-white text-[17px] font-semibold py-2.5 px-3 text-center rounded-sm hover:bg-[#1e3252] transition-all duration-200">
+                        Get Now
+                    </button>
                 </div>
-                <div className="h-2"></div>
             </div>
         </div>
     );

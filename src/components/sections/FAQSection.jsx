@@ -4,26 +4,6 @@ import { ChevronDown } from 'lucide-react';
 export function FAQSection() {
     const faqs = [
         {
-            question: "So how much does GLP-1 actually cost?",
-            answer: "GLP-1 pricing can vary depending on the provider and dosage. Telehealth You offers a transparent $200 flat monthly fee, regardless of dose, so you always know what you’re paying."
-        },
-        {
-            question: "But how do you know what you're getting? Is high quality.",
-            answer: "Choosing a reputable provider is essential. Telehealth You is a trusted company with strong reviews, high medical standards, and licensed providers focused on safe, effective GLP-1 care."
-        },
-        {
-            question: "So do I need to have a doctor to get on GLP-1?",
-            answer: "Yes. You’ll meet with a licensed Telehealth You doctor through our secure telehealth platform to determine if GLP-1 treatment is appropriate for your health and goals."
-        },
-        {
-            question: "Are there a ton of side effects?",
-            answer: "Some side effects are possible with GLP-1 medications. Telehealth You doctors explain what to expect, how to manage symptoms, and monitor your progress throughout treatment."
-        },
-        {
-            question: "Okay, I'm in, how can I get started?",
-            answer: "Getting started is simple. Tap below to connect with the Telehealth You team and begin your online consultation and personalized treatment plan."
-        },
-        {
             question: "Is the program safe?",
             answer: "Yes. Safety is our top priority. All medications are prescribed by licensed providers, with ongoing monitoring to manage side effects and adjust dosing. Your plan is tailored to your health profile to ensure safe, effective weight loss."
         },
@@ -38,11 +18,15 @@ export function FAQSection() {
         {
             question: "What is TeleHealth.com’s weight-loss program?",
             answer: "Our program is a fully online, medically guided weight-loss service. Licensed providers create a personalized plan for each patient, which may include prescription medications, lifestyle guidance, and ongoing support to help you achieve safe, sustainable weight loss."
+        },
+        {
+            question: "What is the difference between GLP-1s and Microdose GLP-1?",
+            answer: "Microdose GLP-1 uses a much lower dose than standard treatments. This gentler approach may be associated with supporting cognitive function, inflammation response, energy levels, as well as healthy aging. Lower doses may also help reduce the likelihood and intensity of side effects."
         }
     ];
 
     return (
-        <section className="bg-white pt-20 pb-20 px-4 md:px-8">
+        <section className="bg-white pt-5 pb-20 px-4 md:px-8">
             <div className="w-[90%] mx-auto">
                 <h2 className="text-3xl md:text-5xl font-bold text-center text-[#28436F] mb-16 font-lora">
                     Frequently Asked Questions
@@ -77,13 +61,13 @@ function FAQItem({ faq }) {
 
     return (
         <div
-            className="border border-[#28436F]/20 relative overflow-hidden transition-all duration-300"
+            className="border border-[#d0e8ec] relative overflow-hidden transition-all duration-300"
             style={{
                 backgroundColor: '#DEECF7DE'
             }}
         >
             <button
-                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10 hover:bg-[#28436F]/5 transition-colors"
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4 relative z-10 transition-colors"
                 onClick={() => setIsOpen(!isOpen)}
             >
                 <span className="text-xl md:text-2xl font-bold text-[#28436F]">

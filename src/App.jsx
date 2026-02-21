@@ -4,12 +4,17 @@ import { Footer } from './components/layout/Footer'
 import { WeightCalculator } from './components/interactive/WeightCalculator'
 import { DoctorHeroSection } from './components/sections/DoctorHeroSection'
 import { InjectableMedsSection } from './components/sections/InjectableMedsSection'
+import { OralMedication } from './components/sections/OralMedication'
 import { FeatureSection } from './components/sections/FeatureSection'
 import { BMISection } from './components/sections/BMISection'
-import { OralMedsSection } from './components/sections/OralMedsSection'
+// import { OralMedsSection } from './components/sections/OralMedsSection'
 import { TimelineSection } from './components/sections/TimelineSection'
 import { SuccessStorySection } from './components/sections/SuccessStorySection'
 import { FAQSection } from './components/sections/FAQSection'
+import { CompoundedMedicine } from './components/sections/CompoundedMedicine'
+import { CompoundedTirzepatide } from './components/sections/compounded_tirzepatide'
+import { AdditionalMedication } from './components/sections/AdditionalMedication'
+import { VideoSection } from './components/sections/VideoSection'
 import { ScrollingBanner } from './components/layout/ScrollingBanner'
 import './index.css'
 
@@ -29,10 +34,16 @@ function App() {
 
       <WeightCalculator />
       <DoctorHeroSection />
+      <CompoundedMedicine />
+      <CompoundedTirzepatide />
+      <AdditionalMedication />
+      <VideoSection />
       <InjectableMedsSection />
-      <FeatureSection />
       <BMISection />
-      <OralMedsSection />
+      <OralMedication />
+      {/* <FeatureSection /> */}
+
+      {/* <OralMedsSection /> */}
       <SuccessStorySection />
       <TimelineSection />
       <FAQSection />
