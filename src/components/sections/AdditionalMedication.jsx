@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // Importing all high-quality assets from src/final
-import Group255 from '../../assets/group-255.png';
+import Group255 from '../../assets/Group-255.png';
 import Group256 from '../../assets/Group-256.png';
 import Group257 from '../../assets/Group-257.png';
 import Group258 from '../../assets/Group-258.png';
