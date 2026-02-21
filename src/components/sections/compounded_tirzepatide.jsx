@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import SemaglutideImg from '../../final/Group 252.png';
-import OralSemaglutideImg from '../../final/Group 253.png';
-import LozengeImg from '../../final/Group 254.png';
+import SemaglutideImg from '../../final/Group-252.png';
+import OralSemaglutideImg from '../../final/Group-253.png';
+import LozengeImg from '../../final/Group-254.png';
 import BackgroundImg from '../../assets/background.png';
 
 const compoundedMeds = [

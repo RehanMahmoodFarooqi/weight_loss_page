@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
 // Importing all high-quality assets from src/final
-import Group255 from '../../final/group 255.png';
-import Group256 from '../../final/Group 256.png';
-import Group257 from '../../final/Group 257.png';
-import Group258 from '../../final/Group 258.png';
-import Group259 from '../../final/Group 259.png';
-import Group260 from '../../final/Group 260.png';
-import Group261 from '../../final/Group 261.png';
+import Group255 from '../../final/group-255.png';
+import Group256 from '../../final/Group-256.png';
+import Group257 from '../../final/Group-257.png';
+import Group258 from '../../final/Group-258.png';
+import Group259 from '../../final/Group-259.png';
+import Group260 from '../../final/Group-260.png';
+import Group261 from '../../final/Group-261.png';
 
 
 // ─── All 18 medications ───────────────────────────────────────────────────────
