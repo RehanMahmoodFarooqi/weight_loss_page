@@ -85,10 +85,15 @@ export function DoctorHeroSection() {
                             <span>Same Day Appointment/ 7 Days a Week</span>
                         </a>
 
-                        <div className="flex items-center gap-3 text-[#28436F] font-semibold text-xl md:text-3xl">
+                        <a
+                            href="https://telehealthyou.com/login"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-3 text-[#28436F] font-semibold text-xl md:text-3xl hover:opacity-80 transition-opacity cursor-pointer no-underline"
+                        >
                             <MessageCircle className="w-8 h-8 md:w-10 md:h-10 text-[#2B4C9A] animate-pulse-zoom" fill="#d0e8ec" />
                             <span>Effortless Text Consultation</span>
-                        </div>
+                        </a>
                     </div>
                 </div>
 
