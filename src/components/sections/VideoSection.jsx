@@ -1,100 +1,102 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react'
 import { Volume2, VolumeX } from 'lucide-react'
-import patientVideo from '../../videos/patient.mp4'
-import doctorVideo from '../../videos/doctor.mp4'
+import v1 from '../../videos/1.mp4'
+import v2 from '../../videos/2.mp4'
+import v3 from '../../videos/3.mp4'
+import v4 from '../../videos/4.mp4'
+import imgTablet from '../../assets/7f01018859caf81f97f96641a370d4856ae31904.png'
 
 /*
   VideoSection
-  ─ Patient video plays first when section enters viewport.
-  ─ On patient end → doctor starts.
-  ─ On doctor end  → loops back to patient.
+  ─ 4 videos play sequentially on 2 tablets: Left (1) -> Right (2) -> Left (3) -> Right (4).
   ─ Videos pause when section scrolls out of view.
-  ─ Starts muted (browser autoplay policy); user can unmute
-    via the 🔇/🔊 button.
+  ─ Starts muted (browser autoplay policy); user can unmute via button.
 */
 
 const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted }) => (
     <div
         style={{
-            perspective: '900px',
-            perspectiveOrigin: '50% 40%',
-            transition: 'opacity 0.6s ease',
-            opacity: isActive ? 1 : 0.50,
+            perspective: '2000px',
+            transition: 'opacity 0.6s ease, transform 0.6s ease',
+            opacity: isActive ? 1 : 0.6,
+            transform: isActive ? 'scale(1)' : 'scale(0.95)',
+            position: 'relative',
+            width: 'clamp(300px, 45vw, 600px)',
         }}
     >
         <div
             style={{
-                transform: flip
-                    ? 'rotateY(-30deg) rotateX(10deg) rotateZ(-3deg)'
-                    : 'rotateY(30deg) rotateX(10deg) rotateZ(3deg)',
-                transformStyle: 'preserve-3d',
-                display: 'inline-block',
-                borderRadius: '16px',
-                background: 'linear-gradient(160deg, #3a3a3a 0%, #1c1c1c 40%, #111 100%)',
-                padding: '10px 10px 16px 10px',
-                boxShadow: flip
-                    ? '12px 24px 50px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.07)'
-                    : '-12px 24px 50px rgba(0,0,0,0.35), 0 2px 8px rgba(0,0,0,0.25), inset 0 0 0 1px rgba(255,255,255,0.07)',
                 position: 'relative',
-                width: '480px',
-                maxWidth: '88vw',
+                width: '100%',
+                aspectRatio: '950/525',
+                transform: flip ? 'scaleX(-1)' : 'none',
             }}
         >
-            {/* Camera notch */}
-            <div style={{
-                position: 'absolute', top: '5px', left: '50%',
-                transform: 'translateX(-50%)', width: '30px',
-                height: '5px', borderRadius: '3px', background: '#2a2a2a',
-            }} />
+            {/* Tablet frame on top — multiply blend lets video shine through white screen */}
+            <img
+                src={imgTablet}
+                alt=""
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                    zIndex: 2,
+                    mixBlendMode: 'multiply',
+                }}
+            />
 
-            {/* Screen */}
-            <div style={{
-                borderRadius: '8px', overflow: 'hidden',
-                background: '#000', aspectRatio: '4/3', width: '100%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                position: 'relative',
-            }}>
-                <video
-                    ref={videoRef}
-                    src={videoSrc}
-                    onEnded={onEnded}
-                    playsInline
-                    muted={isMuted}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-            </div>
-
-            {/* Home bar */}
-            <div style={{
-                position: 'absolute', bottom: '5px', left: '50%',
-                transform: 'translateX(-50%)', width: '44px',
-                height: '3px', borderRadius: '2px', background: '#2a2a2a',
-            }} />
+            {/* Video layer — positioned over the screen area */}
+            <video
+                ref={videoRef}
+                src={videoSrc}
+                onEnded={onEnded}
+                playsInline
+                muted={isMuted}
+                style={{
+                    position: 'absolute',
+                    top: '13%',
+                    left: '26%',
+                    width: '52%',
+                    height: '69%',
+                    objectFit: 'cover',
+                    borderRadius: '2px',
+                    zIndex: 1,
+                    /* Perspective tilt to match the tablet's viewing angle */
+                    transform: 'perspective(5000px) rotateY(30deg) rotateX(32deg)',
+                    transformOrigin: '50% 65%',
+                }}
+            />
         </div>
-
-        {/* Cast shadow */}
-        <div style={{
-            width: '85%', height: '24px', margin: '-10px auto 0',
-            background: flip
-                ? 'radial-gradient(ellipse at 60% 50%, rgba(0,0,0,0.22) 0%, transparent 70%)'
-                : 'radial-gradient(ellipse at 40% 50%, rgba(0,0,0,0.22) 0%, transparent 70%)',
-            filter: 'blur(8px)',
-            transform: flip ? 'scaleX(1.1) translateX(6px)' : 'scaleX(1.1) translateX(-6px)',
-        }} />
 
         {/* Label */}
         <p style={{
-            textAlign: 'center', marginTop: '20px', fontSize: '12px',
-            fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase',
-            color: isActive ? '#28436F' : '#bbb', fontFamily: 'Inter, sans-serif',
-            transition: 'color 0.5s ease', display: 'flex',
-            alignItems: 'center', justifyContent: 'center', gap: '8px',
+            textAlign: 'center',
+            marginTop: '10px',
+            fontSize: '14px',
+            fontWeight: 700,
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            color: isActive ? '#28436F' : '#999',
+            fontFamily: 'Inter, sans-serif',
+            transition: 'color 0.5s ease',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '8px',
+            transform: flip ? 'scaleX(1)' : 'none', // Prevent label flip if parent flips
         }}>
             {label}
             {isActive && (
                 <span style={{
-                    display: 'inline-block', width: '6px', height: '6px',
-                    borderRadius: '50%', background: '#28436F',
+                    display: 'inline-block',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#28436F',
                     animation: 'pulse-dot 1.2s infinite',
                 }} />
             )}
@@ -103,63 +105,63 @@ const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted })
 )
 
 export const VideoSection = () => {
-    const [activeVideo, setActiveVideo] = useState('patient')
+    const [activeIndex, setActiveIndex] = useState(1) // 1, 2, 3, 4
     const [isMuted, setIsMuted] = useState(true)
+    const [isIntersecting, setIsIntersecting] = useState(false)
 
-    const activeVideoRef = useRef('patient')
-    const patientRef = useRef(null)
-    const doctorRef = useRef(null)
+    const leftRef = useRef(null)
+    const rightRef = useRef(null)
     const sectionRef = useRef(null)
 
-
-    /* Keep ref in sync with state so IO callback reads fresh value */
-    const setActive = (val) => {
-        activeVideoRef.current = val
-        setActiveVideo(val)
-    }
-
-    /* IntersectionObserver — play when visible, pause when not */
+    /* IntersectionObserver — track visibility */
     useEffect(() => {
         const section = sectionRef.current
         if (!section) return
 
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    const el = activeVideoRef.current === 'patient'
-                        ? patientRef.current
-                        : doctorRef.current
-                    if (el) {
-                        el.play()
-                            .catch(() => { })
-                    }
-                } else {
-                    if (patientRef.current) patientRef.current.pause()
-                    if (doctorRef.current) doctorRef.current.pause()
-                }
+                setIsIntersecting(entry.isIntersecting)
             },
-            { threshold: 0.15 }   // fire when 15% of section is visible
+            { threshold: 0.1 }
         )
 
         observer.observe(section)
         return () => observer.disconnect()
     }, [])
 
-    /* Patient ends → play doctor */
-    const handlePatientEnded = useCallback(() => {
-        setActive('doctor')
-        if (doctorRef.current) {
-            doctorRef.current.play().catch(() => { })
-        }
-    }, [])
+    /* Source logic:
+       IDX 1: Left=v1, Right=v4 (active: Left)
+       IDX 2: Left=v1, Right=v2 (active: Right)
+       IDX 3: Left=v3, Right=v2 (active: Left)
+       IDX 4: Left=v3, Right=v4 (active: Right)
+    */
+    const leftSrc = (activeIndex <= 2) ? v1 : v3
+    const rightSrc = (activeIndex >= 2 && activeIndex <= 3) ? v2 : v4
 
-    /* Doctor ends → loop back to patient */
-    const handleDoctorEnded = useCallback(() => {
-        setActive('patient')
-        if (patientRef.current) {
-            patientRef.current.currentTime = 0
-            patientRef.current.play().catch(() => { })
+    /* Playback transition effect */
+    useEffect(() => {
+        if (!isIntersecting) {
+            if (leftRef.current) leftRef.current.pause()
+            if (rightRef.current) rightRef.current.pause()
+            return
         }
+
+        const activeRef = (activeIndex === 1 || activeIndex === 3) ? leftRef.current : rightRef.current
+        const inactiveRef = (activeIndex === 2 || activeIndex === 4) ? leftRef.current : rightRef.current
+
+        if (inactiveRef && inactiveRef !== activeRef) {
+            inactiveRef.pause()
+        }
+
+        if (activeRef) {
+            // Give browser a moment to register src change if needed
+            activeRef.load()
+            activeRef.play().catch(err => console.log("Playback blocked:", err))
+        }
+    }, [activeIndex, isIntersecting])
+
+    const handleNext = useCallback(() => {
+        setActiveIndex(prev => (prev % 4) + 1)
     }, [])
 
     return (
@@ -175,7 +177,7 @@ export const VideoSection = () => {
                 ref={sectionRef}
                 style={{
                     background: '#ffffff',
-                    padding: '60px 24px 100px',
+                    padding: '80px 24px 120px',
                     textAlign: 'center',
                     overflow: 'hidden',
                     position: 'relative',
@@ -183,67 +185,64 @@ export const VideoSection = () => {
             >
                 {/* Heading */}
                 <div style={{ marginBottom: '64px' }}>
-                    {/* <h2 style={{
-                        fontSize: '60px', letterSpacing: '3px',
-                        textTransform: 'uppercase', color: '#28436F',
-                        fontFamily: 'Inter, sans-serif', fontWeight: 900,
-                        marginBottom: '12px',
-                    }}>
-                        FAQ's
-                    </h2> */}
                     <h1 style={{
-                        fontSize: 'clamp(28px, 4vw, 52px)', fontWeight: 800,
-                        color: '#1a1a1a', fontFamily: 'Lora, serif',
-                        lineHeight: 1.15, margin: 0,
-                        marginBottom: '25px',
+                        fontSize: 'clamp(32px, 5vw, 56px)',
+                        fontWeight: 800,
+                        color: '#1a1a1a',
+                        fontFamily: 'Lora, serif',
+                        lineHeight: 1.2,
+                        margin: 0,
+                        marginBottom: '20px',
                     }}>
-
-                        <span style={{ color: '#28436F' }}>Hear It From, Those Who Know</span>
+                        <span style={{ color: '#28436F' }}>Hear It From Those Who Know</span>
                     </h1>
-                    {/* <p style={{
-                        marginTop: '16px', fontSize: '25px', color: '#28436F',
-                        fontFamily: 'Inter, sans-serif', maxWidth: '820px',
-                        marginInline: 'auto', lineHeight: 1.6,
+                    <p style={{
+                        fontSize: 'clamp(16px, 2vw, 20px)',
+                        color: '#666',
+                        maxWidth: '700px',
+                        margin: '0 auto',
+                        fontFamily: 'Inter, sans-serif'
                     }}>
-                        A patient's real questions answered by a licensed physician — honest, clear, and medically sound.
-                    </p> */}
+                        Real patient questions, medical expert answers.
+                    </p>
                 </div>
 
                 {/* Tablets */}
                 <div style={{
-                    display: 'flex', justifyContent: 'center',
-                    alignItems: 'flex-end', gap: '80px', flexWrap: 'wrap',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: '20px',
+                    flexWrap: 'wrap',
+                    maxWidth: '1400px',
+                    margin: '0 auto'
                 }}>
-                    {/* Patient — left */}
                     <Tablet
-                        videoSrc={patientVideo}
+                        videoSrc={leftSrc}
                         label="Patient"
                         flip={false}
-                        isActive={activeVideo === 'patient'}
-                        videoRef={patientRef}
-                        onEnded={handlePatientEnded}
+                        isActive={activeIndex === 1 || activeIndex === 3}
+                        videoRef={leftRef}
+                        onEnded={handleNext}
                         isMuted={isMuted}
                     />
 
-                    {/* Doctor — right */}
                     <Tablet
-                        videoSrc={doctorVideo}
+                        videoSrc={rightSrc}
                         label="Doctor"
                         flip={true}
-                        isActive={activeVideo === 'doctor'}
-                        videoRef={doctorRef}
-                        onEnded={handleDoctorEnded}
+                        isActive={activeIndex === 2 || activeIndex === 4}
+                        videoRef={rightRef}
+                        onEnded={handleNext}
                         isMuted={isMuted}
                     />
                 </div>
 
                 {/* Audio Toggle Button */}
                 <div style={{
-                    position: 'absolute',
-                    bottom: '40px',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    zIndex: 50,
+                    marginTop: '60px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }}>
                     <button
                         onClick={() => setIsMuted(prev => !prev)}
@@ -252,34 +251,41 @@ export const VideoSection = () => {
                             color: isMuted ? 'white' : '#28436F',
                             border: '2px solid #28436F',
                             borderRadius: '50px',
-                            padding: '12px 36px',
+                            padding: '14px 40px',
                             fontSize: '16px',
                             fontWeight: '800',
-                            letterSpacing: '2px',
+                            letterSpacing: '1px',
                             cursor: 'pointer',
-                            boxShadow: '0 4px 20px rgba(0,0,0,0.15)',
-                            transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+                            boxShadow: '0 8px 25px rgba(40, 67, 111, 0.15)',
+                            transition: 'all 0.3s ease',
                             fontFamily: 'Inter, sans-serif',
                             textTransform: 'uppercase',
-                            whiteSpace: 'nowrap',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '12px'
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'scale(1.05)';
-                            e.currentTarget.style.boxShadow = '0 6px 25px rgba(40, 67, 111, 0.25)';
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                            e.currentTarget.style.boxShadow = '0 12px 30px rgba(40, 67, 111, 0.25)';
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'scale(1)';
-                            e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.15)';
+                            e.currentTarget.style.transform = 'translateY(0)';
+                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(40, 67, 111, 0.15)';
                         }}
-                        aria-label={isMuted ? 'Unmute' : 'Mute'}
                     >
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
-                            <span>{isMuted ? 'Mute' : 'Unmute'}</span>
-                        </div>
+                        {isMuted ? (
+                            <>
+                                <VolumeX size={20} />
+                                <span>Unmute Audio</span>
+                            </>
+                        ) : (
+                            <>
+                                <Volume2 size={20} />
+                                <span>Mute Audio</span>
+                            </>
+                        )}
                     </button>
                 </div>
-
             </section>
         </>
     )

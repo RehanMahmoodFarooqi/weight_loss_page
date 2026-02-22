@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 export function FAQSection() {
     const faqs = [
@@ -22,6 +23,10 @@ export function FAQSection() {
         {
             question: "What is the difference between GLP-1s and Microdose GLP-1?",
             answer: "Microdose GLP-1 uses a much lower dose than standard treatments. This gentler approach may be associated with supporting cognitive function, inflammation response, energy levels, as well as healthy aging. Lower doses may also help reduce the likelihood and intensity of side effects."
+        },
+        {
+            question: "What is the best method for weight management?",
+            answer: "The most effective approach to weight management focuses on long-term, sustainable lifestyle changes. While medications can support weight loss, they are most effective when used alongside a balanced diet and regular physical activity. Medical weight loss programs bring these elements together under the guidance of a board-certified physician, helping ensure that the plan is realistic, safe, and maintainable over time."
         }
     ];
 
@@ -42,14 +47,15 @@ export function FAQSection() {
                 </div>
 
                 <div className="flex justify-center mt-12 pb-8">
-                    <button
+                    <Link
+                        to="/faqs"
                         className="group relative inline-flex items-center justify-center px-8 py-3.5 font-bold text-white transition-all duration-300 bg-[#28436F] hover:bg-[#1e3252] shadow-[0_8px_25px_rgba(40,67,111,0.2)] hover:shadow-[0_12px_35px_rgba(40,67,111,0.3)] transform hover:-translate-y-1 active:scale-95 overflow-hidden"
                     >
                         <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-400/0 via-white/10 to-blue-400/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></span>
                         <span className="relative flex items-center gap-2 text-xl tracking-wide">
                             More FAQs
                         </span>
-                    </button>
+                    </Link>
                 </div>
             </div>
         </section>

@@ -3,7 +3,7 @@ import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
 
 import NewBottleImage from '../../assets/dfafafdfafd2.gif';
-import TirzepatideImage from '../../assets/hkjuiy.gif';
+import TirzepatideImage from '../../assets/546485128451208562.gif';
 import { MessageCircle } from 'lucide-react';
 
 // Floating Pill Assets

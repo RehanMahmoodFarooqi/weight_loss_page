@@ -4,7 +4,7 @@ import SuccessImg from '../../assets/success-story.jpg';
 export function SuccessStorySection() {
     return (
         <section className="bg-white py-16 px-4 md:px-8">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                 <div className="relative group h-[350px] lg:h-[400px] w-full max-w-lg mx-auto lg:mx-0">
                     {/* Creative border frame */}
                     <div className="absolute top-3 left-3 w-full h-full border-2 border-[#2B4C9A] -z-10 group-hover:top-2 group-hover:left-2 transition-all duration-300"></div>
