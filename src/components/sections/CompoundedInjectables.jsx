@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import SemaglutideImg from '../../assets/Group-252.png';
-import OralSemaglutideImg from '../../assets/Group-253.png';
-import LozengeImg from '../../assets/Group-254.png';
+import SemaglutideImg from '../../assets/Group-249.png';
+import TirzepatideImg from '../../assets/Group-252.png';
 import BackgroundImg from '../../assets/background.png';
 
 const compoundedMeds = [
     {
-        name: 'Tirzepatide',
+        name: 'Semaglutide',
         image: SemaglutideImg,
+        options: [
+            '2.5 mg 2.5 mg/ml 1 ml $199',
+            '2.5 mg 2.5 mg/ml 1 ml $199',
+            '2.5 mg 2.5 mg/ml 1 ml $199',
+        ],
+    },
+    {
+        name: 'Tirzepatide',
+        image: TirzepatideImg,
         options: [
             '2.5 mg 2.5 mg/ml 1 ml $199',
             '2.5 mg 2.5 mg/ml 1 ml $199',
@@ -82,10 +90,6 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef(null);
 
-    // List of meds that shouldn't show strips
-    // Note: in the data it is "GLP-1 Micro-dose"
-    const hideStrips = med.name === 'Oral Tirzepatide' || med.name === 'GLP-1 Micro-dose';
-
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -128,13 +132,12 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
             <div style={{
                 position: 'relative',
                 width: '100%',
-                maxWidth: '420px',
-                aspectRatio: '420/360',
-                // Important: NO overflow hidden here, or strips will clip
+                maxWidth: '500px',
+                aspectRatio: '500/380',
             }}>
 
                 {/* Left dosage column — optional overlap */}
-                {showLeftDosage && !hideStrips && (
+                {showLeftDosage && (
                     <div
                         className={isVisible ? 'animate-slide-in-left' : ''}
                         style={{
@@ -170,7 +173,6 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                     onMouseEnter={() => setHovering(true)}
                     onMouseLeave={() => setHovering(false)}
                 >
-                    {/* Background image */}
                     <img
                         src={BackgroundImg}
                         alt=""
@@ -186,7 +188,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                     />
                 </div>
 
-                {/* Medicine image — Moved outside overflow logic to be more prominent (300×300) */}
+                {/* Medicine image */}
                 <div
                     className="animate-float"
                     style={{
@@ -196,7 +198,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                         alignItems: 'center',
                         justifyContent: 'center',
                         zIndex: hovering ? 50 : 20,
-                        pointerEvents: 'none', // Let hover pass to canvas
+                        pointerEvents: 'none',
                     }}
                 >
                     <img
@@ -215,7 +217,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                 </div>
 
                 {/* Right dosage column — optional overlap */}
-                {showRightDosage && !hideStrips && (
+                {showRightDosage && (
                     <div
                         className={isVisible ? 'animate-slide-in-right' : ''}
                         style={{
@@ -237,47 +239,16 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                 )}
 
             </div>
-
-            {/* Standalone Select Button for specific meds */}
-            {hideStrips && (
-                <div style={{ marginTop: '20px', zIndex: 60 }}>
-                    <button style={{
-                        fontSize: '1rem',
-                        fontWeight: 700,
-                        color: '#28436F',
-                        background: 'white',
-                        border: '2px solid #28436F',
-                        padding: '0.6rem 2rem',
-                        borderRadius: '4px',
-                        whiteSpace: 'nowrap',
-                        cursor: 'pointer',
-                        lineHeight: 1,
-                        transition: 'all 0.2s ease',
-                    }}
-                        onMouseEnter={e => {
-                            e.currentTarget.style.background = '#28436F';
-                            e.currentTarget.style.color = 'white';
-                        }}
-                        onMouseLeave={e => {
-                            e.currentTarget.style.background = 'white';
-                            e.currentTarget.style.color = '#28436F';
-                        }}
-                    >
-                        Select
-                    </button>
-                </div>
-            )}
         </div>
     );
 }
 
-export function CompoundedTirzepatide() {
+export function CompoundedInjectables() {
     return (
         <section style={{ background: 'white', padding: '48px 0', overflow: 'hidden' }}>
             <div style={{ width: '90%', margin: '0 auto' }}>
-
                 {/* Section heading */}
-                {/* <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h3 style={{
                         fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
                         fontWeight: 800,
@@ -286,27 +257,25 @@ export function CompoundedTirzepatide() {
                         letterSpacing: '-0.02em',
                         fontFamily: 'Lora, serif',
                     }}>
-                        Compounded<br />GIP + GLP-1
+                        Compounded GIP + GLP-1
                     </h3>
-                </div> */}
-
-                {/* 3-column grid of hero canvas cards */}
+                </div>
                 <div style={{
                     display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-                    gap: '40px',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                    gap: '60px',
+                    justifyContent: 'center'
                 }}>
                     {compoundedMeds.map((med, i) => (
                         <CompoundedCard
                             key={i}
                             med={med}
-                            showLeftDosage={i === 0}
+                            showLeftDosage={true}
                             showRightDosage={true}
                             index={i}
                         />
                     ))}
                 </div>
-
             </div>
         </section>
     );

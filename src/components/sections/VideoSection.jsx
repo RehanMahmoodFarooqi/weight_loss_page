@@ -37,7 +37,7 @@ const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted })
         style={{
             perspective: '2000px',
             position: 'relative',
-            width: 'clamp(300px, 45vw, 600px)',
+            width: 'clamp(600px, 49vw, 1000px)',
         }}
     >
         <div
@@ -110,43 +110,14 @@ const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted })
                     gap: '10px',
                     pointerEvents: 'auto',
                 }}>
-                    <CallButton Icon={isMuted ? VolumeX : Volume2} active={!isMuted} />
-                    <CallButton Icon={Mic} />
-                    <CallButton Icon={Video} />
+                    <CallButton Icon={isMuted ? VolumeX : Volume2} active={!isMuted} color="rgba(0,0,0,0.8)" />
+                    <CallButton Icon={Mic} color="rgba(0,0,0,0.8)" />
+                    <CallButton Icon={Video} color="rgba(0,0,0,0.8)" />
                     <CallButton Icon={PhoneOff} color="#ff4b4b" />
                 </div>
             </div>
         </div>
 
-        {/* Label */}
-        <p style={{
-            textAlign: 'center',
-            marginTop: '10px',
-            fontSize: '14px',
-            fontWeight: 700,
-            letterSpacing: '2px',
-            textTransform: 'uppercase',
-            color: isActive ? '#28436F' : '#999',
-            fontFamily: 'Inter, sans-serif',
-            transition: 'color 0.5s ease',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            transform: flip ? 'scaleX(1)' : 'none', // Prevent label flip if parent flips
-        }}>
-            {label}
-            {isActive && (
-                <span style={{
-                    display: 'inline-block',
-                    width: '8px',
-                    height: '8px',
-                    borderRadius: '50%',
-                    background: '#28436F',
-                    animation: 'pulse-dot 1.2s infinite',
-                }} />
-            )}
-        </p>
     </div>
 )
 
@@ -223,14 +194,14 @@ export const VideoSection = () => {
                 ref={sectionRef}
                 style={{
                     background: '#ffffff',
-                    padding: '80px 24px 120px',
+                    padding: '40px 24px 120px',
                     textAlign: 'center',
                     overflow: 'hidden',
                     position: 'relative',
                 }}
             >
                 {/* Heading */}
-                <div style={{ marginBottom: '64px' }}>
+                <div style={{ marginBottom: '40px' }}>
                     <h1 style={{
                         fontSize: 'clamp(32px, 5vw, 56px)',
                         fontWeight: 800,
@@ -259,13 +230,12 @@ export const VideoSection = () => {
                     justifyContent: 'center',
                     alignItems: 'center',
                     gap: '20px',
-                    flexWrap: 'wrap',
-                    maxWidth: '1400px',
+                    flexWrap: 'nowrap',
+                    maxWidth: '2200px',
                     margin: '0 auto'
                 }}>
                     <Tablet
                         videoSrc={leftSrc}
-                        label="Patient"
                         flip={false}
                         isActive={activeIndex === 1 || activeIndex === 3}
                         videoRef={leftRef}
@@ -275,7 +245,6 @@ export const VideoSection = () => {
 
                     <Tablet
                         videoSrc={rightSrc}
-                        label="Doctor"
                         flip={true}
                         isActive={activeIndex === 2 || activeIndex === 4}
                         videoRef={rightRef}
@@ -284,53 +253,94 @@ export const VideoSection = () => {
                     />
                 </div>
 
-                {/* Audio Toggle Button */}
+                {/* Combined Labels & Mute Icon Row */}
                 <div style={{
-                    marginTop: '60px',
                     display: 'flex',
-                    justifyContent: 'center'
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    gap: 'clamp(100px, 20vw, 500px)',
+                    marginTop: '-30px',
+                    position: 'relative',
+                    zIndex: 200
                 }}>
+                    {/* Patient Label */}
+                    <div style={{
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        letterSpacing: '2px',
+                        textTransform: 'uppercase',
+                        color: (activeIndex === 1 || activeIndex === 3) ? '#28436F' : '#999',
+                        fontFamily: 'Inter, sans-serif',
+                        transition: 'color 0.5s ease',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                    }}>
+                        Patient
+                        {(activeIndex === 1 || activeIndex === 3) && (
+                            <span style={{
+                                display: 'inline-block',
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: '50%',
+                                background: '#28436F',
+                                animation: 'pulse-dot 1.2s infinite',
+                            }} />
+                        )}
+                    </div>
+
+                    {/* Compact Audio Toggle Icon */}
                     <button
                         onClick={() => setIsMuted(prev => !prev)}
                         style={{
                             background: isMuted ? '#28436F' : 'white',
                             color: isMuted ? 'white' : '#28436F',
                             border: '2px solid #28436F',
-                            borderRadius: '50px',
-                            padding: '14px 40px',
-                            fontSize: '16px',
-                            fontWeight: '800',
-                            letterSpacing: '1px',
-                            cursor: 'pointer',
-                            boxShadow: '0 8px 25px rgba(40, 67, 111, 0.15)',
-                            transition: 'all 0.3s ease',
-                            fontFamily: 'Inter, sans-serif',
-                            textTransform: 'uppercase',
+                            borderRadius: '50%',
+                            width: '50px',
+                            height: '50px',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '12px'
+                            justifyContent: 'center',
+                            cursor: 'pointer',
+                            boxShadow: '0 4px 12px rgba(40, 67, 111, 0.15)',
+                            transition: 'all 0.3s ease',
                         }}
                         onMouseEnter={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-2px)';
-                            e.currentTarget.style.boxShadow = '0 12px 30px rgba(40, 67, 111, 0.25)';
+                            e.currentTarget.style.transform = 'scale(1.1)';
                         }}
                         onMouseLeave={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 8px 25px rgba(40, 67, 111, 0.15)';
+                            e.currentTarget.style.transform = 'scale(1)';
                         }}
                     >
-                        {isMuted ? (
-                            <>
-                                <VolumeX size={20} />
-                                <span>Unmute Audio</span>
-                            </>
-                        ) : (
-                            <>
-                                <Volume2 size={20} />
-                                <span>Mute Audio</span>
-                            </>
-                        )}
+                        {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                     </button>
+
+                    {/* Doctor Label */}
+                    <div style={{
+                        fontSize: '14px',
+                        fontWeight: 700,
+                        letterSpacing: '2px',
+                        textTransform: 'uppercase',
+                        color: (activeIndex === 2 || activeIndex === 4) ? '#28436F' : '#999',
+                        fontFamily: 'Inter, sans-serif',
+                        transition: 'color 0.5s ease',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px',
+                    }}>
+                        Doctor
+                        {(activeIndex === 2 || activeIndex === 4) && (
+                            <span style={{
+                                display: 'inline-block',
+                                width: '8px',
+                                height: '8px',
+                                borderRadius: '50%',
+                                background: '#28436F',
+                                animation: 'pulse-dot 1.2s infinite',
+                            }} />
+                        )}
+                    </div>
                 </div>
             </section>
         </>

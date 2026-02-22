@@ -15,24 +15,6 @@ const compoundedMeds = [
             '2.5 mg 2.5 mg/ml 1 ml $199',
         ],
     },
-    {
-        name: 'Oral Semaglutide',
-        image: OralSemaglutideImg,
-        options: [
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-        ],
-    },
-    {
-        name: 'GLP-1 Lozenge',
-        image: LozengeImg,
-        options: [
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-        ],
-    },
 ];
 
 /* Each individual dosage pill: "text | Select" */
@@ -100,6 +82,9 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
     const [isVisible, setIsVisible] = useState(false);
     const cardRef = useRef(null);
 
+    // List of meds that shouldn't show strips
+    const hideStrips = med.name === 'Oral Semaglutide' || med.name === 'GLP-1 Lozenge';
+
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
@@ -148,7 +133,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
             }}>
 
                 {/* Left dosage column — optional overlap */}
-                {showLeftDosage && (
+                {showLeftDosage && !hideStrips && (
                     <div
                         className={isVisible ? 'animate-slide-in-left' : ''}
                         style={{
@@ -229,7 +214,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                 </div>
 
                 {/* Right dosage column — optional overlap */}
-                {showRightDosage && (
+                {showRightDosage && !hideStrips && (
                     <div
                         className={isVisible ? 'animate-slide-in-right' : ''}
                         style={{
@@ -252,6 +237,35 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
 
             </div>
 
+            {/* Standalone Select Button for specific meds */}
+            {hideStrips && (
+                <div style={{ marginTop: '20px', zIndex: 60 }}>
+                    <button style={{
+                        fontSize: '1rem',
+                        fontWeight: 700,
+                        color: '#28436F',
+                        background: 'white',
+                        border: '2px solid #28436F',
+                        padding: '0.6rem 2rem',
+                        borderRadius: '4px',
+                        whiteSpace: 'nowrap',
+                        cursor: 'pointer',
+                        lineHeight: 1,
+                        transition: 'all 0.2s ease',
+                    }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.background = '#28436F';
+                            e.currentTarget.style.color = 'white';
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.background = 'white';
+                            e.currentTarget.style.color = '#28436F';
+                        }}
+                    >
+                        Select
+                    </button>
+                </div>
+            )}
         </div>
     );
 }

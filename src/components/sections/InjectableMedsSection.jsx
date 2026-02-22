@@ -20,17 +20,13 @@ export function InjectableMedsSection() {
     ];
 
     return (
-        <section className="relative py-10 px-4 md:px-8 overflow-hidden bg-white">
+        <section className="relative pt-0 pb-10 px-4 md:px-8 overflow-hidden bg-white">
             <div className="w-[90%] mx-auto">
                 {/* Section Header */}
                 <div className="text-center mb-12">
-                    {/*<h2 className="text-2xl md:text-5xl font-bold text-[#28436F] mb-3 font-lora">
-                        Your Weight-Loss Medication is Just a One-Click Away.
-                    </h2>*/}
-                    <h3 className="text-5xl md:text-6xl font-bold text-[#28436F] tracking-tight">
+                    <h3 className="text-4xl md:text-6xl font-extrabold text-[#28436F] tracking-tight font-lora">
                         Branded Medications
                     </h3>
-                    {/* <div className="w-120 h-1 bg-[#28436F] mx-auto mt-3 mb-0"></div> */}
                 </div>
 
                 {/* 3x2 Grid */}

@@ -12,10 +12,10 @@ import { BMISection } from './components/sections/BMISection'
 import { TimelineSection } from './components/sections/TimelineSection'
 import { SuccessStorySection } from './components/sections/SuccessStorySection'
 import { FAQSection } from './components/sections/FAQSection'
-import { CompoundedMedicine } from './components/sections/CompoundedMedicine'
-import { CompoundedTirzepatide } from './components/sections/compounded_tirzepatide'
+import { CompoundedInjectables } from './components/sections/CompoundedInjectables'
 import { AdditionalMedication } from './components/sections/AdditionalMedication'
 import { VideoSection } from './components/sections/VideoSection'
+import { MainMedicineSection } from './components/sections/MainMedicineSection'
 import { ScrollingBanner } from './components/layout/ScrollingBanner'
 import { FAQsPage } from './components/pages/FAQsPage'
 import './index.css'
@@ -31,9 +31,9 @@ function HomePage() {
 
       <WeightCalculator />
       <DoctorHeroSection />
-      <CompoundedMedicine />
-      <CompoundedTirzepatide />
+      <CompoundedInjectables />
       <AdditionalMedication />
+      <MainMedicineSection />
       <VideoSection />
       <InjectableMedsSection />
       <BMISection />

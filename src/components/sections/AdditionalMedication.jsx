@@ -284,7 +284,7 @@ export function AdditionalMedication() {
                 {/* Get Now Button - Centered at the end */}
                 <div style={{ textAlign: 'center' }}>
                     <button
-                        className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 bg-[#2b4c9a] text-white hover:bg-[#1c1c1c] px-24 py-9 transition-colors rounded-full btn-pulse-fast cursor-pointer font-lora"
+                        className="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 shadow h-9 bg-[#2b4c9a] text-white hover:bg-[#1c1c1c] px-16 py-9 transition-colors rounded-full btn-pulse-fast cursor-pointer font-lora"
                         style={{ fontWeight: 600, fontSize: '30px' }}
                     >
                         Get Now
