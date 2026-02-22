@@ -193,6 +193,10 @@ body {
   animation: pulse-zoom 2s ease-in-out infinite;
 }
 
+.animate-pulse-zoom-fast {
+  animation: pulse-zoom 1s ease-in-out infinite;
+}
+
 @keyframes blink {
 
   0%,
@@ -420,6 +424,38 @@ body {
 
 .btn-pulse-fast {
   animation: btn-pulse 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translate(-100vw, -50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(-45%, -50%);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    transform: translate(100vw, -50%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translate(45%, -50%);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-left {
+  animation: slide-in-left 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .btn-pulse-fast:hover {

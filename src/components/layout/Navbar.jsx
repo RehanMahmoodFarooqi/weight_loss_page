@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Calendar, MessageCircle, Menu, ChevronDown, X, Globe, Headset, Search } from 'lucide-react';
-import LogoImage from '../../assets/logo.jpg';
+import LogoImage from '../../assets/logoo.png';
 
 import ProductDesignImg from '../../assets/ChatGPT Image Feb 16, 2026, 08_29_45 PM.png';
 
@@ -9,6 +9,42 @@ export function Navbar() {
 
     return (
         <nav className="bg-white sticky top-0 z-[1000] border-b-[8px] border-[#d0e8ec]" style={{ boxShadow: '0 2px 8px rgba(0,0,0,0.06)' }}>
+            {/* Top Bar */}
+            <div className="py-1" style={{ background: 'rgb(221, 235, 246)', color: 'rgb(13, 13, 13)', fontFamily: 'Inter, sans-serif' }}>
+                <div className="px-4 md:px-6 lg:px-8">
+                    <div className="flex items-center justify-between gap-8">
+                        <div className="flex items-center gap-8">
+                            <div className="relative">
+                                <button className="flex items-center gap-2 px-3 py-1 rounded-full transition-all hover:opacity-80" style={{ backgroundColor: 'rgb(239, 68, 68)', color: 'rgb(255, 255, 255)' }}>
+                                    <Globe size={14} />
+                                    <span className="text-[13px]" style={{ fontWeight: 700 }}>English</span>
+                                    <ChevronDown size={12} />
+                                </button>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button className="flex items-center gap-2 px-4 py-1.5 rounded-full transition-all hover:opacity-80" style={{ backgroundColor: 'rgb(239, 68, 68)', color: 'rgb(255, 255, 255)' }}>
+                                    <Headset size={14} />
+                                </button>
+                            </div>
+                            <div className="hidden sm:flex items-center gap-2">
+                                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: 'rgb(239, 68, 68)' }}></div>
+                                <span className="text-[13px] tracking-wide" style={{ fontWeight: 600, color: 'rgb(7, 7, 7)' }}>24/7 Available</span>
+                            </div>
+                        </div>
+
+                        {/* Search bar removed as per user request */}
+
+                        <div className="hidden md:flex items-center gap-4">
+                            <a href="/login" className="px-2 py-2 tracking-wide transition hover:opacity-80" style={{ fontWeight: 700, color: 'rgb(0, 119, 181)', fontSize: '16px' }}>Login</a>
+                            <button className="px-3 py-1 rounded-full tracking-wide transition-all hover:opacity-90" style={{ fontWeight: 400, backgroundColor: 'rgb(43, 76, 154)', color: 'rgb(255, 255, 255)', border: '2px solid rgb(43, 76, 154)' }}>Get Started</button>
+                            <button className="flex items-center justify-center gap-2 rounded-full transition-all cursor-pointer" style={{ border: '2px solid rgb(0, 119, 181)', padding: '8px 10px', height: '36px', fontSize: '13px', fontWeight: 600, color: 'rgb(0, 119, 181)', marginRight: '24px' }}>
+                                <MessageCircle size={14} style={{ color: 'rgb(0, 119, 181)' }} />
+                                <span className="tracking-wide">Messages</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             {/* Sub Header (Main Navigation) */}
             <div className="max-w-[1920px] mx-auto px-4 md:px-6">
@@ -167,19 +203,11 @@ export function Navbar() {
                     {/* Right Side: Buttons */}
                     <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
                         <button
-                            className="flex items-center justify-center gap-2 bg-[#28436F] text-white hover:bg-[#000000E6] transition-all cursor-pointer btn-blink-nav rounded-lg animate-pulse-zoom"
-                            style={{ padding: '8px 16px', height: '42px', fontSize: '13px', fontWeight: 600, marginRight: '14px' }}
+                            className="flex items-center justify-center gap-2 bg-[#2B4C9A] text-white rounded-full hover:bg-[#000000E6] transition-all cursor-pointer btn-blink-nav animate-pulse-zoom-fast"
+                            style={{ padding: '8px 16px', height: '42px', fontSize: '13px', fontWeight: 600, marginRight: '50px' }}
                         >
                             <Calendar className="w-3.5 h-3.5" />
                             <span className="tracking-wide">Book Appointment</span>
-                        </button>
-
-                        <button
-                            className="flex items-center justify-center gap-2 border-2 border-[#28436F] text-[#28436F] transition-all cursor-pointer rounded-lg"
-                            style={{ padding: '8px 10px', height: '36px', fontSize: '13px', fontWeight: 600, color: 'rgb(40, 67, 111)', marginRight: '24px' }}
-                        >
-                            <MessageCircle className="w-3.5 h-3.5 text-[#28436F]" />
-                            <span className="tracking-wide">Messages</span>
                         </button>
                     </div>
 

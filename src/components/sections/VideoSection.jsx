@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { Volume2, VolumeX } from 'lucide-react'
+import { Volume2, VolumeX, Mic, Video, PhoneOff } from 'lucide-react'
 import v1 from '../../videos/1.mp4'
 import v2 from '../../videos/2.mp4'
 import v3 from '../../videos/3.mp4'
@@ -13,13 +13,29 @@ import imgTablet from '../../assets/7f01018859caf81f97f96641a370d4856ae31904.png
   ─ Starts muted (browser autoplay policy); user can unmute via button.
 */
 
+const CallButton = ({ Icon, color = 'rgba(255,255,255,0.2)', active = true }) => (
+    <div style={{
+        width: 'clamp(24px, 4vw, 36px)',
+        height: 'clamp(24px, 4vw, 36px)',
+        borderRadius: '50%',
+        background: color,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        backdropFilter: 'blur(4px)',
+        border: '1px solid rgba(255,255,255,0.3)',
+        color: active ? 'white' : 'rgba(255,255,255,0.5)',
+        transition: 'all 0.2s ease',
+    }}>
+        <Icon size={'clamp(12px, 2vw, 18px)'} />
+    </div>
+)
+
 const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted }) => (
     <div
         style={{
             perspective: '2000px',
-            transition: 'opacity 0.6s ease, transform 0.6s ease',
-            opacity: isActive ? 1 : 0.6,
-            transform: isActive ? 'scale(1)' : 'scale(0.95)',
             position: 'relative',
             width: 'clamp(300px, 45vw, 600px)',
         }}
@@ -70,6 +86,36 @@ const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted })
                     transformOrigin: '50% 65%',
                 }}
             />
+
+            {/* Call UI Overlay — Perspective tilt must match video */}
+            <div style={{
+                position: 'absolute',
+                top: '13%',
+                left: '26%',
+                width: '52%',
+                height: '69%',
+                zIndex: 3,
+                pointerEvents: 'none',
+                transform: 'perspective(5000px) rotateY(30deg) rotateX(32deg)',
+                transformOrigin: '50% 65%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                paddingBottom: '5%',
+                transition: 'opacity 0.5s ease',
+            }}>
+                <div style={{
+                    display: 'flex',
+                    gap: '10px',
+                    pointerEvents: 'auto',
+                }}>
+                    <CallButton Icon={isMuted ? VolumeX : Volume2} active={!isMuted} />
+                    <CallButton Icon={Mic} />
+                    <CallButton Icon={Video} />
+                    <CallButton Icon={PhoneOff} color="#ff4b4b" />
+                </div>
+            </div>
         </div>
 
         {/* Label */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import SemaglutideImg from '../../assets/Group-249.png';
 import OralSemaglutideImg from '../../assets/Group-250.png';
@@ -95,11 +95,35 @@ function DosageRow({ label }) {
     );
 }
 
-function CompoundedCard({ med, showLeftDosage, showRightDosage }) {
+function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
     const [hovering, setHovering] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
+    const cardRef = useRef(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            { threshold: 0.2 }
+        );
+
+        if (cardRef.current) {
+            observer.observe(cardRef.current);
+        }
+
+        return () => {
+            if (cardRef.current) {
+                observer.unobserve(cardRef.current);
+            }
+        };
+    }, []);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
+        <div ref={cardRef} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%' }}>
 
             {/* ── Medicine name (Primary Headline, like H&H) ── */}
             <h4 style={{
@@ -125,17 +149,22 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage }) {
 
                 {/* Left dosage column — optional overlap */}
                 {showLeftDosage && (
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: 0,
-                        transform: 'translate(-45%, -50%)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '1.2rem',
-                        zIndex: 100,
-                        width: 'min(280px, 80%)',
-                    }}>
+                    <div
+                        className={isVisible ? 'animate-slide-in-left' : ''}
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            left: 0,
+                            transform: 'translate(-45%, -50%)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '1.2rem',
+                            zIndex: 100,
+                            width: 'min(280px, 80%)',
+                            opacity: isVisible ? 1 : 0,
+                            animationDelay: `${index * 0.2}s`,
+                        }}
+                    >
                         {med.options.map((opt, i) => <DosageRow key={`L${i}`} label={opt} />)}
                     </div>
                 )}
@@ -201,17 +230,22 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage }) {
 
                 {/* Right dosage column — optional overlap */}
                 {showRightDosage && (
-                    <div style={{
-                        position: 'absolute',
-                        top: '50%',
-                        right: 0,
-                        transform: 'translate(45%, -50%)',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '1.2rem',
-                        zIndex: 100,
-                        width: 'min(280px, 80%)',
-                    }}>
+                    <div
+                        className={isVisible ? 'animate-slide-in-right' : ''}
+                        style={{
+                            position: 'absolute',
+                            top: '50%',
+                            right: 0,
+                            transform: 'translate(45%, -50%)',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: '1.2rem',
+                            zIndex: 100,
+                            width: 'min(280px, 80%)',
+                            opacity: isVisible ? 1 : 0,
+                            animationDelay: `${index * 0.2 + 0.1}s`,
+                        }}
+                    >
                         {med.options.map((opt, i) => <DosageRow key={`R${i}`} label={opt} />)}
                     </div>
                 )}
@@ -253,6 +287,7 @@ export function CompoundedMedicine() {
                             med={med}
                             showLeftDosage={i === 0}
                             showRightDosage={true}
+                            index={i}
                         />
                     ))}
                 </div>
