@@ -23,7 +23,7 @@ import './index.css'
 function HomePage() {
   return (
     <>
-      <div className="pt-8 pb-8 text-center bg-white">
+      <div className="pt-8 pb-4 text-center bg-white">
         <h2 className="text-4xl md:text-4xl lg:text-7xl font-bold font-lora mb-4 tracking-tight animate-fade-in">
           Dream Bigger. Lose Smarter
         </h2>

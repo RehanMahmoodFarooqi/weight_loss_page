@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../../Calculator.css';
 import ScaleImage from '../../assets/custom-scale.png';
 
-import NewBottleImage from '../../assets/dfafafdfafd2.gif';
+import NewBottleImage from '../../assets/548452.gif';
 import TirzepatideImage from '../../assets/546485128451208562.gif';
 import { MessageCircle } from 'lucide-react';
 
@@ -94,7 +94,7 @@ export function WeightCalculator() {
 
     return (
         <div
-            className="relative min-h-[70vh] flex items-center overflow-hidden mt-4"
+            className="relative min-h-[70vh] flex items-center overflow-hidden"
             style={{
                 backgroundColor: '#d0e8ec',
             }}

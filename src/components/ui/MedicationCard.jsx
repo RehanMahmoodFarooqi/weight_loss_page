@@ -20,7 +20,7 @@ export function MedicationCard({ item }) {
                         </span>
                     )}
                 </h4>
-                <div className="w-32 h-32 flex-shrink-0 -mt-6 -mr-4">
+                <div className="w-32 h-32 flex-shrink-0 -mt-6 mr-2">
                     <img
                         src={LogoImg}
                         alt="Logo"
@@ -40,7 +40,7 @@ export function MedicationCard({ item }) {
 
             {/* Bottom: As Low As + Price + Get Started */}
             <div className="mt-2">
-                <p className="text-[11px] text-[#28436F] font-bold uppercase tracking-[0.12em] mb-1.5 text-center">
+                <p className="text-[15px] text-[#28436F] font-bold uppercase tracking-[0.12em] mb-1 text-center">
                     As Low As
                 </p>
                 <div className="flex items-stretch gap-2">

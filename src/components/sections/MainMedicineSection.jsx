@@ -162,7 +162,7 @@ export function MainMedicineSection() {
                         letterSpacing: '-0.02em',
                         fontFamily: 'Lora, serif',
                     }}>
-                        Compounded GIP + GLP-1
+                        Additional Compounded GIP + GLP-1
                     </h3>
                 </div>
                 <div style={{

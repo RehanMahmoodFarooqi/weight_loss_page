@@ -170,10 +170,10 @@ const BarGraph = () => {
             <div className="relative h-[400px] md:h-[500px] w-full pl-20 pb-12">
 
                 {/* Y-Axis Line */}
-                <div className="absolute left-0 top-0 bottom-8 w-[1px] bg-[#28436F]"></div>
+                <div className="absolute left-0 top-0 bottom-8 w-[3px] bg-[#28436F]"></div>
 
                 {/* X-Axis Line */}
-                <div className="absolute left-0 right-0 bottom-8 h-[1px] bg-[#28436F] z-20"></div>
+                <div className="absolute left-0 right-0 bottom-8 h-[3px] bg-[#28436F] z-20"></div>
 
                 {/* Y-Axis Label */}
                 <div className="absolute -left-80 top-1/2 -translate-y-1/2 -rotate-90 text-2xl md:text-3xl font-bold text-[#28436F] whitespace-nowrap">
