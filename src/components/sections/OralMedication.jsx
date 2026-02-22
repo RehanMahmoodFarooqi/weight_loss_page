@@ -82,7 +82,7 @@ export function OralMedication() {
             <div className="w-[90%] mx-auto">
                 {/* Section Header */}
                 <div className="text-center mb-12">
-                    <h3 className="text-5xl md:text-6xl font-bold text-[#28436F] tracking-tight">
+                    <h3 className="text-5xl md:text-6xl font-bold text-[#28436F] tracking-tight mt-10">
                         Oral Medications
                     </h3>
                 </div>
