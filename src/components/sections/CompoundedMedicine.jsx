@@ -262,7 +262,7 @@ export function CompoundedMedicine() {
             <div style={{ width: '90%', margin: '0 auto' }}>
 
                 {/* Section heading */}
-                <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+                <div style={{ textAlign: 'center', marginBottom: '60px' }}>
                     <h3 style={{
                         fontSize: 'clamp(2.2rem, 5vw, 3.8rem)',
                         fontWeight: 800,
@@ -271,7 +271,7 @@ export function CompoundedMedicine() {
                         letterSpacing: '-0.02em',
                         fontFamily: 'Lora, serif',
                     }}>
-                        Compounded<br />GIP + GLP-1
+                        Compounded GIP + GLP-1
                     </h3>
                 </div>
 
