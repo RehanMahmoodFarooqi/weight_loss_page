@@ -194,7 +194,7 @@ export const VideoSection = () => {
                 ref={sectionRef}
                 style={{
                     background: '#ffffff',
-                    padding: '40px 24px 120px',
+                    padding: '40px 24px 80px',
                     textAlign: 'center',
                     overflow: 'hidden',
                     position: 'relative',
@@ -214,7 +214,7 @@ export const VideoSection = () => {
                         <span style={{ color: '#28436F' }}>Hear It From Those Who Know</span>
                     </h1>
                     <p style={{
-                        fontSize: 'clamp(16px, 2vw, 20px)',
+                        fontSize: 'clamp(16px, 2vw, 30px)',
                         color: '#666',
                         maxWidth: '700px',
                         margin: '0 auto',

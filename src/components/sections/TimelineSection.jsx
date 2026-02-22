@@ -36,7 +36,7 @@ const getBlocks = (val, preferredSize) => {
     return blocks;
 };
 
-const AnimatedBlockBar = ({ value, maxScale = 30, color, isVisible, delay = 0, blockSize, animationKey }) => {
+const AnimatedBlockBar = ({ value, maxScale = 30, color, isVisible, delay = 0, blockSize, animationKey, separatorColor }) => {
     const [progress, setProgress] = React.useState(0);
 
     React.useEffect(() => {
@@ -95,10 +95,11 @@ const AnimatedBlockBar = ({ value, maxScale = 30, color, isVisible, delay = 0, b
                 >
                     {blocks.map((blockVal, i) => (
                         <div key={i}
-                            className={`w-full relative overflow-hidden border-[#d0e8ec] ${i !== blocks.length - 1 ? 'border-t-[0.01px] border-t-[#28436F]' : 'border-[0.2px]'}`}
+                            className="w-full relative overflow-hidden"
                             style={{
                                 flexGrow: blockVal,
                                 backgroundColor: color,
+                                borderTop: i !== blocks.length - 1 ? `2px solid ${separatorColor}` : 'none',
                                 // Subtle shadow to add depth
                                 boxShadow: i !== blocks.length - 1 ? 'none' : 'inset 0 -1px 0 0 rgba(40, 67, 111, 0.1)'
                             }}
@@ -157,11 +158,11 @@ const BarGraph = () => {
             {/* Legend */}
             <div className="flex flex-wrap items-center justify-center gap-6 mb-15 text-2xl md:text-3xl">
                 <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-[#CCE3ED]"></div>
+                    <div className="w-6 h-6 bg-[#B4D9E8]"></div>
                     <span className="text-[#28436F] font-medium">Minimum Expected Loss (%)</span>
                 </div>
                 <div className="flex items-center gap-2">
-                    <div className="w-6 h-6 bg-[#D5EDED]"></div>
+                    <div className="w-6 h-6 bg-[#679FC8]"></div>
                     <span className="text-[#28436F] font-medium">Maximum Expected Loss (%)</span>
                 </div>
             </div>
@@ -170,10 +171,10 @@ const BarGraph = () => {
             <div className="relative h-[400px] md:h-[500px] w-full pl-20 pb-12">
 
                 {/* Y-Axis Line */}
-                <div className="absolute left-0 top-0 bottom-8 w-[3px] bg-[#28436F]"></div>
+                <div className="absolute left-0 top-0 bottom-8 w-[5px] bg-[#28436F]"></div>
 
                 {/* X-Axis Line */}
-                <div className="absolute left-0 right-0 bottom-8 h-[3px] bg-[#28436F] z-20"></div>
+                <div className="absolute left-0 right-0 bottom-8 h-[5px] bg-[#28436F] z-20"></div>
 
                 {/* Y-Axis Label */}
                 <div className="absolute -left-80 top-1/2 -translate-y-1/2 -rotate-90 text-2xl md:text-3xl font-bold text-[#28436F] whitespace-nowrap">
@@ -192,7 +193,8 @@ const BarGraph = () => {
                                 <div className="w-full max-w-[80px] md:max-w-[120px] h-full">
                                     <AnimatedBlockBar
                                         value={item.min}
-                                        color="#CCE3ED"
+                                        color="#B4D9E8"
+                                        separatorColor="#679FC8"
                                         isVisible={isVisible}
                                         delay={index * 200 + 200}
                                         blockSize={item.blockSize}
@@ -204,7 +206,8 @@ const BarGraph = () => {
                                 <div className="w-full max-w-[80px] md:max-w-[120px] h-full">
                                     <AnimatedBlockBar
                                         value={item.max}
-                                        color="#cceeeeff"
+                                        color="#679FC8"
+                                        separatorColor="#B4D9E8"
                                         isVisible={isVisible}
                                         delay={index * 200 + 600}
                                         blockSize={item.blockSize}

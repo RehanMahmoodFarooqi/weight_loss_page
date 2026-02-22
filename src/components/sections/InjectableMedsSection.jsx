@@ -23,7 +23,7 @@ export function InjectableMedsSection() {
         <section className="relative pt-0 pb-10 px-4 md:px-8 overflow-hidden bg-white">
             <div className="w-[90%] mx-auto">
                 {/* Section Header */}
-                <div className="text-center mb-12">
+                <div className="text-center mb-8">
                     <h3 className="text-4xl md:text-6xl font-extrabold text-[#28436F] tracking-tight font-lora">
                         Branded Medications
                     </h3>

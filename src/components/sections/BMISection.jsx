@@ -21,7 +21,7 @@ export function BMISection() {
     }, [weight, heightFeet, heightInches]);
 
     return (
-        <section className="bg-white pt-0 pb-0 overflow-hidden">
+        <section className="bg-white pt-10 pb-0 overflow-hidden">
             {/* 1. Top Content with Geometric Background */}
             <div
                 className="relative pt-6 pb-0"
