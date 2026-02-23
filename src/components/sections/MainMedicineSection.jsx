@@ -120,24 +120,26 @@ function MainMedCard({ med }) {
                     <button style={{
                         fontSize: '0.9rem',
                         fontWeight: 700,
-                        color: '#28436F',
-                        background: 'white',
+                        color: 'white',
+                        background: '#28436F',
                         border: '2px solid #28436F',
                         padding: '0.5rem 2rem',
                         borderRadius: '4px',
                         whiteSpace: 'nowrap',
                         cursor: 'pointer',
                         lineHeight: 1,
-                        transition: 'all 0.2s ease',
+                        transition: 'all 0.3s cubic-bezier(0.2, 0, 0.2, 1)',
                         marginTop: '10px',
                     }}
                         onMouseEnter={e => {
-                            e.currentTarget.style.background = '#28436F';
-                            e.currentTarget.style.color = 'white';
+                            e.currentTarget.style.background = 'rgba(40, 67, 111, 0.85)';
+                            e.currentTarget.style.boxShadow = '0 4px 15px rgba(40, 67, 111, 0.2)';
+                            e.currentTarget.style.transform = 'translateY(-1px)';
                         }}
                         onMouseLeave={e => {
-                            e.currentTarget.style.background = 'white';
-                            e.currentTarget.style.color = '#28436F';
+                            e.currentTarget.style.background = '#28436F';
+                            e.currentTarget.style.boxShadow = 'none';
+                            e.currentTarget.style.transform = 'translateY(0)';
                         }}
                     >
                         Select

@@ -16,7 +16,7 @@ import dark3 from '../../assets/dark3-removebg-preview.png';
 // import dark4 from '../../assets/dark4-removebg-preview.png';
 
 export function WeightCalculator() {
-    const [currentWeight, setCurrentWeight] = useState(300);
+    const [currentWeight, setCurrentWeight] = useState(0);
     const [weightChange, setWeightChange] = useState(0);
     const trackRef = useRef(null);
     const [isDragging, setIsDragging] = useState(false);
@@ -107,12 +107,12 @@ export function WeightCalculator() {
                     // Top Left Cluster
                     { src: dark1, top: '8%', left: '8%', width: '110px', delay: '1.5s', rotate: '-30deg' },
                     { src: wc1, top: '23%', left: '13%', width: '120px', delay: '0s', rotate: '35deg' },
-                    { src: wc3, top: '40%', left: '10%', width: '120px', delay: '2s' },
+                    { src: wc3, top: '40%', left: '7%', width: '120px', delay: '2s' },
 
                     // Top Right Cluster
                     { src: wc2, top: '8%', right: '8%', width: '130px', delay: '1s' },
                     { src: dark3, top: '20%', right: '15%', width: '110px', delay: '2.5s', rotate: '40deg' },
-                    { src: wc4, top: '40%', right: '10%', width: '150px', delay: '0.5s', rotate: '-35deg' },
+                    { src: wc4, top: '40%', right: '7%', width: '150px', delay: '0.5s', rotate: '-35deg' },
 
                     // Bottom Left Cluster
                     { src: dark3, bottom: '30%', left: '23%', width: '100px', delay: '0.8s', rotate: '20deg' },

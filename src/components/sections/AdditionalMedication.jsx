@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar } from 'lucide-react';
 
-// Importing all high-quality assets from src/final
+// Importing all high-quality assets from src/assets
 import Group255 from '../../assets/Group-255.png';
 import Group256 from '../../assets/Group-256.png';
 import Group257 from '../../assets/Group-257.png';
@@ -11,9 +11,8 @@ import Group260 from '../../assets/Group-260.png';
 import Group261 from '../../assets/Group-261.png';
 
 
-// ─── All 18 medications ───────────────────────────────────────────────────────
+// ─── All 7 medications ────────────────────────────────────────────────────────
 const allMedications = [
-    // ── Row 1 ──────────────────────────────────────────────────────────────────
     {
         name: 'Lipotropic (MIC) + B12',
         description: 'Fat-metabolizing injection with B12 support for enhanced fat burning.',
@@ -46,8 +45,6 @@ const allMedications = [
         leftTags: ['Cell Energy', 'Anti-aging'],
         rightTags: ['Focus', 'Metabolism'],
     },
-
-    // ── Row 2 ──────────────────────────────────────────────────────────────────
     {
         name: 'NAD+ Nasal Spray',
         description: 'Fast-absorbing NAD+ for brain support.',
@@ -78,47 +75,15 @@ const allMedications = [
 function MedCard({ item }) {
     const [isHovered, setIsHovered] = useState(false);
 
-    // Logic to separate Cap Tags (>9 chars AND longest on its side) from Body Tags
-    const getSplitTags = (tags) => {
-        if (!tags || tags.length === 0) return { cap: [], body: [] };
-
-        // Find the index of the longest tag
-        let longestIdx = 0;
-        let maxLen = 0;
-        tags.forEach((tag, idx) => {
-            if (tag.length > maxLen) {
-                maxLen = tag.length;
-                longestIdx = idx;
-            }
-        });
-
-        const cap = [];
-        const body = [];
-
-        tags.forEach((tag, idx) => {
-            // The single longest tag ALWAYS moves up, regardless of length
-            if (idx === longestIdx) {
-                cap.push(tag);
-            } else {
-                body.push(tag);
-            }
-        });
-
-        return { cap, body };
-    };
-
-    const leftSplit = getSplitTags(item.leftTags);
-    const rightSplit = getSplitTags(item.rightTags);
-
     return (
         <div
             className="med-card-outer"
             style={{
-                background: '#e4f1f4', // Specific light blue from design
+                background: '#e4f1f4',
                 borderRadius: '24px',
                 display: 'flex',
                 flexDirection: 'column',
-                padding: '12px 18px 12px',
+                padding: '10px 16px 10px',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 height: '100%',
@@ -128,8 +93,8 @@ function MedCard({ item }) {
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            {/* Title */}
-            <div style={{ textAlign: 'center', marginBottom: '2px' }}>
+            {/* Title + Description */}
+            <div style={{ textAlign: 'center', marginBottom: '8px' }}>
                 <h4 style={{
                     fontSize: '24px',
                     fontWeight: '900',
@@ -141,83 +106,46 @@ function MedCard({ item }) {
                 }}>
                     {item.name}
                 </h4>
+                <p style={{
+                    fontSize: '13px',
+                    color: '#5a7fa8',
+                    fontFamily: 'Lora, serif',
+                    margin: '5px 0 0',
+                    fontStyle: 'italic',
+                    fontWeight: '500',
+                    lineHeight: 1.3,
+                }}>
+                    {item.description}
+                </p>
             </div>
 
-            {/* ── Image Area ── */}
+            {/* ── Image Area with Overlapping Tags ── */}
             <div style={{
                 position: 'relative',
                 flex: 1,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                minHeight: '280px',
-                marginTop: '14px',
+                minHeight: '190px',
+                marginTop: '6px',
             }}>
-                {/* Product Image - Clean & Centered */}
+                {/* Product Image */}
                 <img
                     src={item.image}
                     alt={item.name}
                     style={{
-                        height: '280px',
+                        height: '180px',
                         width: 'auto',
                         objectFit: 'contain',
                         transform: isHovered ? 'scale(1.08)' : 'scale(1)',
                         transition: 'transform 0.5s cubic-bezier(0.2, 0, 0.2, 1)',
                         filter: 'drop-shadow(0 8px 16px rgba(40,67,111,0.12))',
                         zIndex: 2,
+                        position: 'relative',
                     }}
                 />
 
-                {/* ── TAGS: BOTTLE CAP AREA (Longest > 9 characters) ── */}
-                {/* Left Cap Tags */}
-                <div style={{
-                    position: 'absolute',
-                    left: '0',
-                    top: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    gap: '12px',
-                    zIndex: 3,
-                    pointerEvents: 'none',
-                    width: 'auto',
-                }}>
-                    {leftSplit.cap.map((tag, i) => (
-                        <div key={i} className="global-tag" style={{
-                            transform: `translateX(-10px)`,
-                            pointerEvents: 'auto',
-                        }}>
-                            <div className="tag-text">{tag}</div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Right Cap Tags */}
-                <div style={{
-                    position: 'absolute',
-                    right: '0',
-                    top: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-end',
-                    gap: '12px',
-                    zIndex: 3,
-                    pointerEvents: 'none',
-                    width: 'auto',
-                }}>
-                    {rightSplit.cap.map((tag, i) => (
-                        <div key={i} className="global-tag" style={{
-                            transform: `translateX(10px)`,
-                            pointerEvents: 'auto',
-                        }}>
-                            <div className="tag-text">{tag}</div>
-                        </div>
-                    ))}
-                </div>
-
-
-                {/* ── TAGS: BOTTLE BODY AREA (Remaining tags) ── */}
-                {/* Left Body Tags */}
+                {/* Left Tags — overlapping bottle */}
                 <div style={{
                     position: 'absolute',
                     left: '0',
@@ -226,22 +154,18 @@ function MedCard({ item }) {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-start',
-                    gap: '12px',
+                    gap: '10px',
                     zIndex: 3,
                     pointerEvents: 'none',
-                    width: 'auto',
                 }}>
-                    {leftSplit.body.map((tag, i) => (
-                        <div key={i} className="global-tag" style={{
-                            transform: `translateX(${i % 2 === 0 ? '-10px' : '0'})`,
-                            pointerEvents: 'auto',
-                        }}>
+                    {item.leftTags.map((tag, i) => (
+                        <div key={i} className="global-tag" style={{ pointerEvents: 'auto' }}>
                             <div className="tag-text">{tag}</div>
                         </div>
                     ))}
                 </div>
 
-                {/* Right Body Tags */}
+                {/* Right Tags — overlapping bottle */}
                 <div style={{
                     position: 'absolute',
                     right: '0',
@@ -250,16 +174,12 @@ function MedCard({ item }) {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'flex-end',
-                    gap: '12px',
+                    gap: '10px',
                     zIndex: 3,
                     pointerEvents: 'none',
-                    width: 'auto',
                 }}>
-                    {rightSplit.body.map((tag, i) => (
-                        <div key={i} className="global-tag" style={{
-                            transform: `translateX(${i % 2 === 0 ? '10px' : '0'})`,
-                            pointerEvents: 'auto',
-                        }}>
+                    {item.rightTags.map((tag, i) => (
+                        <div key={i} className="global-tag" style={{ pointerEvents: 'auto' }}>
                             <div className="tag-text">{tag}</div>
                         </div>
                     ))}
@@ -304,7 +224,7 @@ function MedCard({ item }) {
                             transition: 'all 0.2s ease',
                         }}
                         onMouseEnter={e => {
-                            e.currentTarget.style.background = '#1a3a6b'; // Darker blue
+                            e.currentTarget.style.background = '#1a3a6b';
                             e.currentTarget.style.color = '#fff';
                         }}
                         onMouseLeave={e => {
@@ -322,18 +242,16 @@ function MedCard({ item }) {
 
 // ─── Section ──────────────────────────────────────────────────────────────────
 export function AdditionalMedication() {
-    // Split into rows: 4 × 4 then 2
     const rows = [
         allMedications.slice(0, 4),   // Row 1
-        allMedications.slice(4, 8),   // Row 2
-        allMedications.slice(8, 12),  // Row 3
-        allMedications.slice(12, 16), // Row 4
-        allMedications.slice(16, 18), // Row 5 — 2 cards centered
+        allMedications.slice(4, 7),   // Row 2 — 3 cards
     ];
 
     return (
-        <section style={{ background: '#fff', padding: '60px 16px 40px' }}>
-            <div style={{ maxWidth: '1600px', margin: '0 auto' }}>
+        <section style={{ background: '#fff', padding: '60px 40px 40px' }}>
+            <div style={{ maxWidth: '1900px', margin: '0 auto' }}>
+
+
                 {/* Section heading */}
                 <div style={{ textAlign: 'center', marginBottom: '48px' }}>
                     <h2 style={{
@@ -349,49 +267,39 @@ export function AdditionalMedication() {
                     </h2>
                 </div>
 
-                {/* Rows 1–4: 4-column grid */}
-                {rows.slice(0, 4).map((row, rowIdx) => (
-                    <div
-                        key={rowIdx}
-                        style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(4, 1fr)',
-                            gap: '35px',
-                            marginBottom: '16px',
-                        }}
-                    >
-                        {row.map((item, i) => (
-                            <MedCard key={i} item={item} />
-                        ))}
-                    </div>
-                ))}
-
-                {/* Row 5: 2 columns — centered (each card ~25% width) */}
-                <div
-                    style={{
-                        display: 'grid',
-                        gridTemplateColumns: 'repeat(4, 1fr)',
-                        gap: '35px',
-                        marginBottom: '8px',
-                    }}
-                >
-                    {/* Empty spacer left */}
-                    <div />
-                    {rows[4].map((item, i) => (
+                {/* Row 1: 4 cards */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: '28px',
+                    marginBottom: '28px',
+                }}>
+                    {rows[0].map((item, i) => (
                         <MedCard key={i} item={item} />
                     ))}
-                    {/* Empty spacer right */}
-                    <div />
                 </div>
 
-                {/* Get Now Button - Centered at the end */}
-                <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                {/* Row 2: 3 cards — centered */}
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(4, 1fr)',
+                    gap: '28px',
+                    marginBottom: '8px',
+                }}>
+                    {rows[1].map((item, i) => (
+                        <MedCard key={i} item={item} />
+                    ))}
+                    <div /> {/* spacer on right */}
+                </div>
+
+                {/* Get Now Button */}
+                <div style={{ textAlign: 'center', marginTop: '50px' }}>
                     <button
-                        className="flex items-center justify-center gap-2 bg-[#2B4C9A] text-white rounded-full hover:bg-[#000000E6] transition-all cursor-pointer btn-blink-nav animate-pulse-zoom-fast mx-auto"
-                        style={{ padding: '12px 32px', height: '54px', fontSize: '20px', fontWeight: 600 }}
+                        className="inline-flex items-center justify-center gap-2 bg-[#2B4C9A] text-white rounded-full hover:bg-[#000000E6] transition-all cursor-pointer btn-blink-nav animate-pulse-zoom-fast font-lora"
+                        style={{ fontWeight: 600, fontSize: '24px', padding: '16px 40px' }}
                     >
-                        {/* <Calendar className="w-5 h-5" /> */}
-                        <span className="tracking-wide">Get Now</span>
+
+                        Get Now
                     </button>
                 </div>
             </div>

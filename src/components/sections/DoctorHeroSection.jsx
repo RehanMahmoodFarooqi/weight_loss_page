@@ -109,12 +109,12 @@ export function DoctorHeroSection() {
                             Your body signals hunger & fullness based on hormones—our medications mimic those signals so you feel fuller faster and longer.
                         </p>
 
-                        <div className="mt-15 w-full overflow-hidden rounded-2xl shadow-xl relative z-20 transition-transform hover:scale-[1.02]"
+                        <div className="mt-15 w-full overflow-hidden rounded-2xl shadow-xl relative z-20"
                             style={{ marginLeft: '17rem', marginTop: '1rem' }}>
                             <img
                                 src={Slide2Img}
                                 alt="Weight Loss Progress"
-                                className="w-full h-auto object-cover"
+                                className="w-full h-auto object-cover transition-transform duration-500 hover:scale-110"
                             />
                         </div>
                     </div>
@@ -124,7 +124,7 @@ export function DoctorHeroSection() {
                             <img
                                 src={DoctorImg}
                                 alt="Consulting Doctor"
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                             />
                         </div>
                     </div>

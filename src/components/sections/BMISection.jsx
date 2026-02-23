@@ -39,7 +39,7 @@ export function BMISection() {
                     </h2>
 
                     {/* Inputs Row */}
-                    <div className="flex flex-col md:flex-row gap-6 w-full max-w-4xl justify-center">
+                    <div className="flex flex-col md:flex-row gap-16 w-full max-w-4xl justify-center">
                         <div className="flex-1">
                             <label className="block font-lora text-[20px] font-bold text-[#01578c] mb-1">Weight (lbs)</label>
                             <input

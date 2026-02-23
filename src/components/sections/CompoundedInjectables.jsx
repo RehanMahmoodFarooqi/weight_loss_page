@@ -211,7 +211,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                             filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.22))',
                             userSelect: 'none',
                             transition: 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)',
-                            transform: hovering ? 'scale(1.2)' : 'scale(1)',
+                            transform: hovering ? 'scale(1.4)' : 'scale(1)',
                         }}
                     />
                 </div>

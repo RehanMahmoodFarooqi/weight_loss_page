@@ -376,14 +376,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background-color: #ffffff;
+  background-color: #e2f2e9;
   padding: 6px 14px;
   border-radius: 9999px !important;
   /* Circular for tags */
   font-size: 16px;
   font-weight: 800 !important;
   color: #28436F;
-  border: 1px solid rgba(40, 67, 111, 0.1);
+  border: 2px solid #28436F;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
   white-space: nowrap;
   font-family: 'Roboto', sans-serif !important;
