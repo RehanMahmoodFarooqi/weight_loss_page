@@ -463,3 +463,12 @@ body {
   transform: scale(1.02);
   background-color: #1c1c1c !important;
 }
+
+/* Dosage pill forced radii */
+.dosage-pill {
+  border-radius: 135px !important;
+}
+
+.dosage-pill-btn {
+  border-radius: 25px !important;
+}

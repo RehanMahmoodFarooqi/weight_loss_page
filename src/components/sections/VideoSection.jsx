@@ -1,5 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react'
-import { Volume2, VolumeX, Mic, Video, PhoneOff } from 'lucide-react'
+import { Volume2, VolumeX, Mic, Video, Phone } from 'lucide-react'
 import v1 from '../../videos/1.mp4'
 import v2 from '../../videos/2.mp4'
 import v3 from '../../videos/3.mp4'
@@ -8,116 +8,143 @@ import imgTablet from '../../assets/7f01018859caf81f97f96641a370d4856ae31904.png
 
 /*
   VideoSection
-  ─ 4 videos play sequentially on 2 tablets: Left (1) -> Right (2) -> Left (3) -> Right (4).
+  ─ 2 tablets side by side, each with a main video + PIP self-view.
+  ─ 4 videos play sequentially: Left (1) -> Right (2) -> Left (3) -> Right (4).
   ─ Videos pause when section scrolls out of view.
   ─ Starts muted (browser autoplay policy); user can unmute via button.
 */
 
-const CallButton = ({ Icon, color = 'rgba(255,255,255,0.2)', active = true }) => (
-    <div style={{
-        width: 'clamp(24px, 4vw, 36px)',
-        height: 'clamp(24px, 4vw, 36px)',
-        borderRadius: '50%',
-        background: color,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        cursor: 'pointer',
-        backdropFilter: 'blur(4px)',
-        border: '1px solid rgba(255,255,255,0.3)',
-        color: active ? 'white' : 'rgba(255,255,255,0.5)',
-        transition: 'all 0.2s ease',
-    }}>
-        <Icon size={'clamp(12px, 2vw, 18px)'} />
-    </div>
-)
-
-const Tablet = ({ videoSrc, label, flip, isActive, videoRef, onEnded, isMuted }) => (
-    <div
-        style={{
-            perspective: '2000px',
-            position: 'relative',
-            width: 'clamp(600px, 49vw, 1000px)',
-        }}
-    >
+const Tablet = ({ videoSrc, pipVideoSrc, flip, videoRef, onEnded, isMuted, label, isActive }) => (
+    <div className="flex flex-col items-center">
         <div
+            className="relative shrink-0"
             style={{
-                position: 'relative',
-                width: '100%',
-                aspectRatio: '950/525',
-                transform: flip ? 'scaleX(-1)' : 'none',
+                width: 950,
+                height: 525,
+                transform: flip ? 'scaleX(-1)' : undefined,
             }}
         >
-            {/* Tablet frame on top — multiply blend lets video shine through white screen */}
-            <img
-                src={imgTablet}
-                alt=""
-                style={{
-                    position: 'absolute',
-                    inset: 0,
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'contain',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                    zIndex: 2,
-                    mixBlendMode: 'multiply',
-                }}
-            />
-
-            {/* Video layer — positioned over the screen area */}
-            <video
-                ref={videoRef}
-                src={videoSrc}
-                onEnded={onEnded}
-                playsInline
-                muted={isMuted}
-                style={{
-                    position: 'absolute',
-                    top: '13%',
-                    left: '26%',
-                    width: '52%',
-                    height: '69%',
-                    objectFit: 'cover',
-                    borderRadius: '2px',
-                    zIndex: 1,
-                    /* Perspective tilt to match the tablet's viewing angle */
-                    transform: 'perspective(5000px) rotateY(30deg) rotateX(32deg)',
-                    transformOrigin: '50% 65%',
-                }}
-            />
-
-            {/* Call UI Overlay — Perspective tilt must match video */}
-            <div style={{
-                position: 'absolute',
+        {/* Main video — positioned over the screen area */}
+        <video
+            ref={videoRef}
+            src={videoSrc}
+            onEnded={onEnded}
+            playsInline
+            muted={isMuted}
+            className="absolute object-cover rounded-md"
+            style={{
                 top: '13%',
                 left: '26%',
                 width: '52%',
                 height: '69%',
-                zIndex: 3,
-                pointerEvents: 'none',
+                zIndex: 1,
                 transform: 'perspective(5000px) rotateY(30deg) rotateX(32deg)',
                 transformOrigin: '50% 65%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                paddingBottom: '5%',
-                transition: 'opacity 0.5s ease',
+            }}
+        />
+
+        {/* PIP self-view — small video in the top-right of the screen */}
+        {pipVideoSrc && (
+            <video
+                src={pipVideoSrc}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute object-cover rounded-sm"
+                style={{
+                    top: '24%',
+                    left: '59%',
+                    width: '8%',
+                    height: '10%',
+                    zIndex: 1,
+                    transform: 'perspective(1200px) rotateY(28deg) rotateX(32deg)',
+                    transformOrigin: '50% 50%',
+                    borderRadius: 4,
+                    boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                }}
+            />
+        )}
+
+        {/* Call action buttons — positioned at bottom of screen area */}
+        <div
+            className="absolute flex items-center justify-center"
+            style={{
+                top: '69%',
+                left: '29%',
+                width: '52%',
+                height: 'auto',
+                zIndex: 3,
+                transform: 'perspective(5000px) rotateY(30deg) rotateX(32deg)',
+                transformOrigin: '50% 65%',
+                gap: 10,
+            }}
+        >
+            <button style={{
+                width: 34, height: 34, borderRadius: '50%',
+                backgroundColor: 'rgba(31,41,55,0.8)', backdropFilter: 'blur(4px)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: 'none', cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                transform: flip ? 'scaleX(-1)' : undefined,
             }}>
-                <div style={{
-                    display: 'flex',
-                    gap: '10px',
-                    pointerEvents: 'auto',
-                }}>
-                    <CallButton Icon={isMuted ? VolumeX : Volume2} active={!isMuted} color="rgba(0,0,0,0.8)" />
-                    <CallButton Icon={Mic} color="rgba(0,0,0,0.8)" />
-                    <CallButton Icon={Video} color="rgba(0,0,0,0.8)" />
-                    <CallButton Icon={PhoneOff} color="#ff4b4b" />
-                </div>
-            </div>
+                <Video size={16} color="#ffffff" />
+            </button>
+            <button style={{
+                width: 34, height: 34, borderRadius: '50%',
+                backgroundColor: 'rgba(239,68,68,0.9)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: 'none', cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                transform: flip ? 'scaleX(-1)' : undefined,
+            }}>
+                <Phone size={16} color="#ffffff" />
+            </button>
+            <button style={{
+                width: 34, height: 34, borderRadius: '50%',
+                backgroundColor: 'rgba(31,41,55,0.8)', backdropFilter: 'blur(4px)',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: 'none', cursor: 'pointer', boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
+                transform: flip ? 'scaleX(-1)' : undefined,
+            }}>
+                <Mic size={16} color="#ffffff" />
+            </button>
         </div>
 
+        {/* Tablet frame on top — multiply blend lets video shine through white screen */}
+        <img
+            src={imgTablet}
+            alt=""
+            draggable={false}
+            className="absolute inset-0 w-full h-full object-contain pointer-events-none select-none"
+            style={{ zIndex: 2, mixBlendMode: 'multiply' }}
+        />
+    </div>
+
+        {/* Label below tablet */}
+        <div style={{
+            fontSize: '14px',
+            fontWeight: 700,
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            color: isActive ? '#28436F' : '#999',
+            fontFamily: 'Inter, sans-serif',
+            transition: 'color 0.5s ease',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            marginTop: '12px',
+        }}>
+            {label}
+            {isActive && (
+                <span style={{
+                    display: 'inline-block',
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    background: '#28436F',
+                    animation: 'pulse-dot 1.2s infinite',
+                }} />
+            )}
+        </div>
     </div>
 )
 
@@ -152,8 +179,9 @@ export const VideoSection = () => {
        IDX 3: Left=v3, Right=v2 (active: Left)
        IDX 4: Left=v3, Right=v4 (active: Right)
     */
-    const leftSrc = (activeIndex <= 2) ? v1 : v3
-    const rightSrc = (activeIndex >= 2 && activeIndex <= 3) ? v2 : v4
+    // Doctor videos on LEFT tablet, Patient videos on RIGHT tablet
+    const leftSrc = (activeIndex <= 2) ? v2 : v4   // Doctor
+    const rightSrc = (activeIndex <= 2) ? v1 : v3   // Patient
 
     /* Playback transition effect */
     useEffect(() => {
@@ -178,7 +206,10 @@ export const VideoSection = () => {
     }, [activeIndex, isIntersecting])
 
     const handleNext = useCallback(() => {
-        setActiveIndex(prev => (prev % 4) + 1)
+        setActiveIndex(prev => {
+            if (prev >= 4) return prev // Stop after all 4 videos have played
+            return prev + 1
+        })
     }, [])
 
     return (
@@ -224,72 +255,43 @@ export const VideoSection = () => {
                     </p>
                 </div>
 
-                {/* Tablets */}
-                <div style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: '20px',
-                    flexWrap: 'nowrap',
-                    maxWidth: '2200px',
-                    margin: '0 auto'
-                }}>
+                {/* Tablets — responsive scaling like reference implementation */}
+                <div
+                    className="flex items-center justify-center gap-0 scale-[0.3] sm:scale-[0.42] md:scale-[0.55] lg:scale-[0.7] xl:scale-[0.9] 2xl:scale-100 transition-transform"
+                    style={{ marginLeft: '-200px', marginRight: '-200px' }}
+                >
                     <Tablet
                         videoSrc={leftSrc}
+                        pipVideoSrc={rightSrc}
                         flip={false}
-                        isActive={activeIndex === 1 || activeIndex === 3}
                         videoRef={leftRef}
                         onEnded={handleNext}
                         isMuted={isMuted}
+                        label="Doctor"
+                        isActive={activeIndex === 2 || activeIndex === 4}
                     />
 
                     <Tablet
                         videoSrc={rightSrc}
+                        pipVideoSrc={leftSrc}
                         flip={true}
-                        isActive={activeIndex === 2 || activeIndex === 4}
                         videoRef={rightRef}
                         onEnded={handleNext}
                         isMuted={isMuted}
+                        label="Patient"
+                        isActive={activeIndex === 1 || activeIndex === 3}
                     />
                 </div>
 
-                {/* Combined Labels & Mute Icon Row */}
+                {/* Centered Mute Toggle */}
                 <div style={{
                     display: 'flex',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    gap: 'clamp(100px, 20vw, 500px)',
-                    marginTop: '-30px',
+                    marginTop: '-20px',
                     position: 'relative',
                     zIndex: 200
                 }}>
-                    {/* Patient Label */}
-                    <div style={{
-                        fontSize: '14px',
-                        fontWeight: 700,
-                        letterSpacing: '2px',
-                        textTransform: 'uppercase',
-                        color: (activeIndex === 1 || activeIndex === 3) ? '#28436F' : '#999',
-                        fontFamily: 'Inter, sans-serif',
-                        transition: 'color 0.5s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                    }}>
-                        Patient
-                        {(activeIndex === 1 || activeIndex === 3) && (
-                            <span style={{
-                                display: 'inline-block',
-                                width: '8px',
-                                height: '8px',
-                                borderRadius: '50%',
-                                background: '#28436F',
-                                animation: 'pulse-dot 1.2s infinite',
-                            }} />
-                        )}
-                    </div>
-
-                    {/* Compact Audio Toggle Icon */}
                     <button
                         onClick={() => setIsMuted(prev => !prev)}
                         style={{
@@ -315,32 +317,6 @@ export const VideoSection = () => {
                     >
                         {isMuted ? <VolumeX size={20} /> : <Volume2 size={20} />}
                     </button>
-
-                    {/* Doctor Label */}
-                    <div style={{
-                        fontSize: '14px',
-                        fontWeight: 700,
-                        letterSpacing: '2px',
-                        textTransform: 'uppercase',
-                        color: (activeIndex === 2 || activeIndex === 4) ? '#28436F' : '#999',
-                        fontFamily: 'Inter, sans-serif',
-                        transition: 'color 0.5s ease',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                    }}>
-                        Doctor
-                        {(activeIndex === 2 || activeIndex === 4) && (
-                            <span style={{
-                                display: 'inline-block',
-                                width: '8px',
-                                height: '8px',
-                                borderRadius: '50%',
-                                background: '#28436F',
-                                animation: 'pulse-dot 1.2s infinite',
-                            }} />
-                        )}
-                    </div>
                 </div>
             </section>
         </>
