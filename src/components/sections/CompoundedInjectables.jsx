@@ -28,12 +28,11 @@ const compoundedMeds = [
 /* Each individual dosage pill: "text | Select" */
 function DosageRow({ label }) {
     return (
-        <div style={{
+        <div className="dosage-pill" style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             flexWrap: 'nowrap',
-            borderRadius: '20px',
             overflow: 'hidden',
             background: '#e2f2e9',
             padding: '0.5rem 0.8rem',
@@ -43,9 +42,9 @@ function DosageRow({ label }) {
             border: '2px solid #28436F',
         }}>
             <span style={{
-                fontSize: '0.85rem',
+                fontSize: '0.95rem',
                 color: '#28436F',
-                fontWeight: 900,
+                fontWeight: 700,
                 lineHeight: 1.2,
                 paddingLeft: '4px',
                 whiteSpace: 'nowrap',
@@ -53,21 +52,22 @@ function DosageRow({ label }) {
                 textOverflow: 'ellipsis',
                 flexGrow: 1,
                 marginRight: '8px',
+                fontFamily: 'Ubuntu, sans-serif',
             }}>
                 {label}
             </span>
-            <button style={{
-                fontSize: '0.75rem',
+            <button className="dosage-pill-btn" style={{
+                fontSize: '0.85rem',
                 fontWeight: 700,
                 color: '#28436F',
                 background: 'white',
                 border: '2px solid #28436F',
                 padding: '0.4rem 0.6rem',
-                borderRadius: '4px',
                 whiteSpace: 'nowrap',
                 cursor: 'pointer',
                 lineHeight: 1,
                 flexShrink: 0,
+                fontFamily: 'sans-serif',
                 transition: 'all 0.2s ease',
             }}
                 onMouseEnter={e => {
@@ -142,7 +142,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                         className={isVisible ? 'animate-slide-in-left' : ''}
                         style={{
                             position: 'absolute',
-                            top: '50%',
+                            top: '30%',
                             left: 0,
                             transform: 'translate(-45%, -50%)',
                             display: 'flex',
@@ -222,7 +222,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                         className={isVisible ? 'animate-slide-in-right' : ''}
                         style={{
                             position: 'absolute',
-                            top: '50%',
+                            top: '70%',
                             right: 0,
                             transform: 'translate(45%, -50%)',
                             display: 'flex',
