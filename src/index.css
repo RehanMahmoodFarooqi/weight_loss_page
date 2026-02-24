@@ -458,6 +458,36 @@ body {
   animation: slide-in-right 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
+@keyframes slide-out-left {
+  from {
+    transform: translate(-45%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-100vw, -50%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-right {
+  from {
+    transform: translate(45%, -50%);
+    opacity: 1;
+  }
+  to {
+    transform: translate(100vw, -50%);
+    opacity: 0;
+  }
+}
+
+.animate-slide-out-left {
+  animation: slide-out-left 0.7s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+}
+
+.animate-slide-out-right {
+  animation: slide-out-right 0.7s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards;
+}
+
 .btn-pulse-fast:hover {
   animation: none;
   transform: scale(1.02);

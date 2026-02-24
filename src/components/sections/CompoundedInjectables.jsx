@@ -9,18 +9,18 @@ const compoundedMeds = [
         name: 'Semaglutide',
         image: SemaglutideImg,
         options: [
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
         ],
     },
     {
         name: 'Tirzepatide',
         image: TirzepatideImg,
         options: [
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
-            '2.5 mg 2.5 mg/ml 1 ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
+            '2.5mg 2.5mg/ml 1ml $199',
         ],
     },
 ];
@@ -42,7 +42,7 @@ function DosageRow({ label }) {
             border: '2px solid #28436F',
         }}>
             <span style={{
-                fontSize: '0.95rem',
+                fontSize: '1.15rem',
                 color: '#28436F',
                 fontWeight: 700,
                 lineHeight: 1.2,
@@ -53,6 +53,7 @@ function DosageRow({ label }) {
                 flexGrow: 1,
                 marginRight: '8px',
                 fontFamily: 'Ubuntu, sans-serif',
+                wordSpacing: '0.35em',
             }}>
                 {label}
             </span>
@@ -93,10 +94,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.unobserve(entry.target);
-                }
+                setIsVisible(entry.isIntersecting);
             },
             { threshold: 0.2 }
         );
@@ -117,7 +115,7 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
 
             {/* ── Medicine name (Primary Headline, like H&H) ── */}
             <h4 style={{
-                fontSize: '35px',
+                fontSize: '48px',
                 fontWeight: 900,
                 color: '#28436F',
                 marginBottom: '12px',
@@ -133,18 +131,18 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                 position: 'relative',
                 width: '100%',
                 maxWidth: '500px',
-                aspectRatio: '500/380',
+                aspectRatio: '1/1',
             }}>
 
                 {/* Left dosage column — optional overlap */}
                 {showLeftDosage && (
                     <div
-                        className={isVisible ? 'animate-slide-in-left' : ''}
+                        className={isVisible ? 'animate-slide-in-left' : 'animate-slide-out-left'}
                         style={{
                             position: 'absolute',
-                            top: '30%',
-                            left: 0,
-                            transform: 'translate(-45%, -50%)',
+                            top: '22%',
+                            left: '-55px',
+                            transform: 'translate(-100vw, -50%)',
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '1.2rem',
@@ -205,13 +203,17 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                         src={med.image}
                         alt={med.name}
                         style={{
-                            width: '300px',
-                            height: '300px',
+                            width: '420px',
+                            height: '420px',
                             objectFit: 'contain',
                             filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.22))',
                             userSelect: 'none',
                             transition: 'transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94)',
+<<<<<<< Updated upstream
                             transform: hovering ? 'scale(1.4)' : 'scale(1)',
+=======
+                            transform: hovering ? 'scale(1.15)' : 'scale(1)',
+>>>>>>> Stashed changes
                         }}
                     />
                 </div>
@@ -219,12 +221,12 @@ function CompoundedCard({ med, showLeftDosage, showRightDosage, index }) {
                 {/* Right dosage column — optional overlap */}
                 {showRightDosage && (
                     <div
-                        className={isVisible ? 'animate-slide-in-right' : ''}
+                        className={isVisible ? 'animate-slide-in-right' : 'animate-slide-out-right'}
                         style={{
                             position: 'absolute',
-                            top: '70%',
+                            top: '77%',
                             right: 0,
-                            transform: 'translate(45%, -50%)',
+                            transform: 'translate(100vw, -50%)',
                             display: 'flex',
                             flexDirection: 'column',
                             gap: '1.2rem',

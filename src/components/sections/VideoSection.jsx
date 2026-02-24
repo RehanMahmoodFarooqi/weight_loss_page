@@ -258,7 +258,7 @@ export const VideoSection = () => {
                 {/* Tablets — responsive scaling like reference implementation */}
                 <div
                     className="flex items-center justify-center gap-0 scale-[0.3] sm:scale-[0.42] md:scale-[0.55] lg:scale-[0.7] xl:scale-[0.9] 2xl:scale-100 transition-transform"
-                    style={{ marginLeft: '-200px', marginRight: '-200px' }}
+                    style={{ marginLeft: '-40px', marginRight: '-40px' }}
                 >
                     <Tablet
                         videoSrc={leftSrc}
